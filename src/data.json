@@ -1,0 +1,34 @@
+[
+    {
+        "category": "Book",
+        "title": "uzoma is looking for a book: something about African food",
+        "description": "I’ve just had this urge to read about cooking from different parts of the continent...",
+        "createdAt": "30 mins ago",
+        "isFound": false,
+        "isInCommunity": true 
+    },
+    {
+        "category": "Music",
+        "title": "sammy is looking for music: something to put me in my feelings",
+        "description": "I’m looking for some like D’Angelo type vibes on a Saturday night with wine after your girl left you :’(",
+        "createdAt": "2 hours ago",
+        "isFound": false,
+        "isInCommunity": true 
+    },
+    {
+        "category": "Film",
+        "title": "tunde was looking for a film: anything starring Genevieve",
+        "description": "That’s just the mood I’m in *shrugs*",
+        "createdAt": "2 days ago",
+        "isFound": true,
+        "isInCommunity": true 
+    },
+    {
+        "category": "Web",
+        "title": "jubril is looking for a web installation",
+        "description": "Anything to excite!",
+        "createdAt": "10 mins ago",
+        "isFound": false,
+        "isInCommunity": false 
+    }
+]
