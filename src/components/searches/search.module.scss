@@ -4,26 +4,26 @@
     text-align: center;
     border-bottom: $grey-border;
     padding: 1.5rem 0;
-}
 
-.search:first-child {
-    border-top: $grey-border;
-}
+    h3 {
+        color: $text-color
+    }
 
-.search h3 {
-    color: $text-color;
-}
+    p {
+        font-family: $text-font;
+    }
 
-.search p {
-    font-family: $text-font;
+    &:first-child {
+        border-top: $grey-border;
+    }
 }
 
 .footer {
     display: flex;
     justify-content: space-evenly;
-}
 
-.footer .found {
-    color: green;
-    font-weight: bold;
+    .found {
+        color: green;
+        font-weight: bold;
+    }
 }

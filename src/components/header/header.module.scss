@@ -26,9 +26,9 @@
     width: 16rem;
     margin-right: 2rem;
     cursor: pointer;
-}
 
-.button:hover {
-    background: #1e272e;
-    color: #f4f4f4;
+    &:hover {
+        background: #1e272e;
+        color: #f4f4f4;
+    }
 }

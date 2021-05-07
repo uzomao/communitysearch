@@ -4,12 +4,12 @@
     display: flex;
     justify-content: space-between;
     margin: $header-margin;
-}
 
-.filter .checkbox {
-    display: flex;
-}
+    .checkbox {
+        display: flex;
 
-.filter .checkbox input {
-    margin-right: .5rem;
+        input {
+            margin-right: .5rem;
+        }
+    }
 }

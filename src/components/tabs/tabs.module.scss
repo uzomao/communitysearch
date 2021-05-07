@@ -4,18 +4,18 @@
 .tabs {
     display: flex;
     margin: 0 2rem;
-}
 
-.tabs button {
-    @extend %btn-style-overrides;
-    border-bottom: 1.5px solid #000;
-    width: 50%;
-    padding: 1.5rem 4rem;
-    font-family: $text-font;
-    font-size: $text-font-size;
-}
+    button {
+        @extend %btn-style-overrides;
+        border-bottom: 1.5px solid #000;
+        width: 50%;
+        padding: 1.5rem 4rem;
+        font-family: $text-font;
+        font-size: $text-font-size;
 
-.tabs button.active {
-    border: 1.5px solid #000;
-    background-color: $active-tab-color;
+        &.active {
+            border: 1.5px solid #000;
+            background-color: $active-tab-color;
+        }
+    }
 }
