@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+p { 
+  font-family: Courier, 'Courier New', monospace
+}
+
+.text-btn {
+  outline: none;
+  background: none;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-decoration: 2px underline;
+  font-size: 21px;
+  border: none;
+  cursor: pointer;
+}
+
+.text-btn:hover {
+  color: #333;
+}

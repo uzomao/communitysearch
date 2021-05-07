@@ -15,3 +15,13 @@
 .search p {
     font-family: Courier, 'Courier New', monospace
 }
+
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer .found {
+    color: green;
+    font-weight: bold;
+}

@@ -1,0 +1,13 @@
+.filter {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2rem;
+}
+
+.filter .checkbox {
+    display: flex;
+}
+
+.filter .checkbox input {
+    margin-right: .5rem;
+}

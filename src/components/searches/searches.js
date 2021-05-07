@@ -7,11 +7,15 @@ const Searches = () => {
     return (
         <div>
             {
-                searches.map(({ title, description, createdAt }, index) => 
+                searches.map(({ title, description, createdAt, suggestionCount, isFound }, index) => 
                     <div key={index} className={searchStyles.search}>
                         <h3>{title}</h3>
                         <p>{description}</p>
-                        <p>{createdAt}</p>
+                        <div className={searchStyles.footer}>
+                            { isFound && <p className={searchStyles.found}>found :)</p>}
+                            <p>{suggestionCount} suggestions</p>
+                            <p>searched {createdAt}</p>
+                        </div>
                     </div>
                 )
             }

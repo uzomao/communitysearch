@@ -5,6 +5,7 @@
         "description": "I’ve just had this urge to read about cooking from different parts of the continent...",
         "createdAt": "30 mins ago",
         "isFound": false,
+        "suggestionCount": 3,
         "isInCommunity": true 
     },
     {
@@ -13,6 +14,7 @@
         "description": "I’m looking for some like D’Angelo type vibes on a Saturday night with wine after your girl left you :’(",
         "createdAt": "2 hours ago",
         "isFound": false,
+        "suggestionCount": 15,
         "isInCommunity": true 
     },
     {
@@ -21,6 +23,7 @@
         "description": "That’s just the mood I’m in *shrugs*",
         "createdAt": "2 days ago",
         "isFound": true,
+        "suggestionCount": 2,
         "isInCommunity": true 
     },
     {
@@ -29,6 +32,16 @@
         "description": "Anything to excite!",
         "createdAt": "10 mins ago",
         "isFound": false,
+        "suggestionCount": 10,
         "isInCommunity": false 
+    },
+    {
+        "category": "Podcast",
+        "title": "kemi is looking for a podcast on plant care",
+        "description": "Something that will help me become a better plant mom",
+        "createdAt": "56 mins ago",
+        "isFound": true,
+        "suggestionCount": 0,
+        "isInCommunity": false
     }
 ]

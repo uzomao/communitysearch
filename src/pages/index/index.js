@@ -1,0 +1,25 @@
+import React from 'react'
+
+import Header from '../../components/header/header'
+import Searches from '../../components/searches/searches'
+import Filter from '../../components/filter/filter'
+
+import indexStyles from './index.module.css'
+
+const Index = () => {
+    return (
+        <div>
+            <Header />
+            <div className={indexStyles.filter}>
+                <Filter />
+                <div className={indexStyles.checkbox}>
+                    <input type="checkbox" />
+                    <p>show past searches</p>
+                </div>
+            </div>
+            <Searches />
+        </div>
+    )
+}
+
+export default Index
