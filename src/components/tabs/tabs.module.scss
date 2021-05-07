@@ -1,21 +1,21 @@
+@import '../../styles/config';
+@import '../../styles/buttons';
+
 .tabs {
     display: flex;
     margin: 0 2rem;
 }
 
 .tabs button {
-    border: none;
+    @extend %btn-style-overrides;
     border-bottom: 1.5px solid #000;
-    outline: none;
-    background: none;
     width: 50%;
     padding: 1.5rem 4rem;
-    font-family: Courier, 'Courier New', monospace;
-    font-size: 21px;
-    cursor: pointer; 
+    font-family: $text-font;
+    font-size: $text-font-size;
 }
 
 .tabs button.active {
     border: 1.5px solid #000;
-    background-color: #D2D4D5;
+    background-color: $active-tab-color;
 }

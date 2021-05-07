@@ -1,7 +1,9 @@
+@import '../../styles/config';
+
 .header {
     display: flex;
     justify-content: space-between;
-    margin: 1rem 2rem;
+    margin: $header-margin;
 }
 
 .right {
@@ -10,23 +12,23 @@
 }
 
 .logo {
-    background-color: #c4c4c4;
+    background-color: $grey;
     width: 60px; height: 60px;
     border-radius: 100%;
 }
 
 .button {
-    font-family: 'Courier';
-    font-size: 21px;
-    border: 2px solid #000;
+    font-family: $text-font;
+    font-size: $text-font-size;
+    border: $default-border;
     outline: none;
     background: none;
     width: 16rem;
     margin-right: 2rem;
+    cursor: pointer;
 }
 
 .button:hover {
     background: #1e272e;
     color: #f4f4f4;
-    cursor: pointer;
 }

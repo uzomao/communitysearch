@@ -5,7 +5,7 @@ import Searches from '../../components/searches/searches'
 import Filter from '../../components/filter/filter'
 import Tabs from '../../components/tabs/tabs'
 
-import indexStyles from './index.module.css'
+import indexStyles from './index.module.scss'
 
 const Index = () => {
     return (

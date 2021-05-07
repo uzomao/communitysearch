@@ -1,6 +1,6 @@
 import React from 'react'
 
-import tabStyles from './tabs.module.css'
+import tabStyles from './tabs.module.scss'
 
 const Tabs = ({ tabOne, tabTwo }) => {
     return (

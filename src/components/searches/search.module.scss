@@ -1,19 +1,21 @@
+@import '../../styles//config';
+
 .search {
     text-align: center;
-    border-bottom: 2px solid #c4c4c4;
+    border-bottom: $grey-border;
     padding: 1.5rem 0;
 }
 
 .search:first-child {
-    border-top: 2px solid #c4c4c4;
+    border-top: $grey-border;
 }
 
 .search h3 {
-    color: #333;
+    color: $text-color;
 }
 
 .search p {
-    font-family: Courier, 'Courier New', monospace
+    font-family: $text-font;
 }
 
 .footer {

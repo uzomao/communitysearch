@@ -1,7 +1,7 @@
 import React from 'react'
 import searches from '../../data.json'
 
-import searchStyles from './search.module.css'
+import searchStyles from './search.module.scss'
 
 const Searches = () => {
     return (
