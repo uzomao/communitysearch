@@ -10,13 +10,28 @@ import {
 
 import Index from './pages/index/index'
 
+import Context from './context'
+
+import { useState, useMemo } from 'react'
+
+const defaultContextValue = {
+  activeHomeTabIndex: 0 
+}
+
 function App() {
+
+  const [ value, setValue ] = useState(defaultContextValue)
+
+  const providerValue = useMemo(() => ({value, setValue}), [value, setValue])
+
   return (
     <Router>
       <Switch>
-        <Route exact path='/'>
-          <Index />
-        </Route>
+        <Context.Provider value={providerValue}>
+          <Route exact path='/'>
+            <Index />
+          </Route>
+        </Context.Provider>
       </Switch>
     </Router>
   );

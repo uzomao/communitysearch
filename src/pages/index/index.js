@@ -8,6 +8,7 @@ import Tabs from '../../components/tabs/tabs'
 import indexStyles from './index.module.scss'
 
 const Index = () => {
+
     return (
         <div>
             <Header />
