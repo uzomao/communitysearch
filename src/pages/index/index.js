@@ -11,7 +11,12 @@ const Index = () => {
     return (
         <div>
             <Header />
-            <Tabs tabOne="Your Community" tabTwo="The Larger Network" />
+            <Tabs 
+                tabs={[
+                    {index: 0, name: "Your Community"},
+                    {index: 1, name: "The Larger Network"}
+                ]}
+            />
             <div className={indexStyles.filter}>
                 <Filter />
                 <div className={indexStyles.checkbox}>

@@ -2,14 +2,17 @@ import React from 'react'
 
 import tabStyles from './tabs.module.scss'
 
-const Tabs = ({ tabOne, tabTwo }) => {
+const Tabs = ({ tabs }) => {
+
+    const [ tab1, tab2 ] = tabs;
+
     return (
         <div className={tabStyles.tabs}>
             <button className={tabStyles.active}>
-                { tabOne }
+                { tab1.name }
             </button>
             <button>
-                { tabTwo }
+                { tab2.name }
             </button>
         </div>
     )
