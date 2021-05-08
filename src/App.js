@@ -14,8 +14,15 @@ import Context from './context'
 
 import { useState, useMemo } from 'react'
 
+const pages = {
+  index: "index"
+}
+
 const defaultContextValue = {
-  activeHomeTabIndex: 0 
+  tabs: [
+    { page: pages.index, isTabOneActive: true }
+  ],
+  getPageTabs: (page, tabs) => { return tabs.filter((tab) => tab.page === page)[0] }
 }
 
 function App() {
@@ -29,7 +36,7 @@ function App() {
       <Switch>
         <Context.Provider value={providerValue}>
           <Route exact path='/'>
-            <Index />
+            <Index page={pages.index} />
           </Route>
         </Context.Provider>
       </Switch>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import Header from '../../components/header/header'
 import Searches from '../../components/searches/searches'
@@ -7,13 +7,21 @@ import Tabs from '../../components/tabs/tabs'
 
 import indexStyles from './index.module.scss'
 
-const Index = () => {
+import Context from '../../context'
+
+const Index = ({ page }) => {
+
+    const { tabs, getPageTabs } = useContext(Context).value
+
+    const pageTabs = getPageTabs(page, tabs)
 
     return (
         <div>
             <Header />
             <Tabs 
-                tabs={[
+                page={page}
+                pageTabs={pageTabs}
+                tabsDetails={[
                     {index: 0, name: "Your Community"},
                     {index: 1, name: "The Larger Network"}
                 ]}
@@ -25,7 +33,7 @@ const Index = () => {
                     <p>show past searches</p>
                 </div>
             </div>
-            <Searches />
+            <Searches page={page} pageTabs={pageTabs} />
         </div>
     )
 }

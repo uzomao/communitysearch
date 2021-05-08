@@ -1,23 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import searches from '../../data.json'
 
 import searchStyles from './search.module.scss'
 
-import Context from '../../context'
+const Searches = ({ pageTabs }) => {
 
-const Searches = () => {
-
-    const { activeHomeTabIndex } = useContext(Context)
-
-    const getFilterValue = ( activeHomeTabIndex ) => {
-        return activeHomeTabIndex === 0 ? true : false
-    }
+    const filteredSearches = searches.filter(({ isInCommunity }) => pageTabs.isTabOneActive ?
+                                                            isInCommunity === true : isInCommunity === false)                                  
 
     return (
         <div>
             {
-                searches.filter(({ isInCommunity }) => isInCommunity === getFilterValue(activeHomeTabIndex))
-                    .map(({ title, description, createdAt, suggestionCount, isFound }, index) => 
+                filteredSearches.map(({ title, description, createdAt, suggestionCount, isFound }, index) => 
                         <div key={index} className={searchStyles.search}>
                             <h3>{title}</h3>
                             <p>{description}</p>

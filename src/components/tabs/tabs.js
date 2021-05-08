@@ -4,21 +4,25 @@ import tabStyles from './tabs.module.scss'
 
 import Context from '../../context'
 
-const Tabs = ({ tabs }) => {
+const Tabs = ({ page, pageTabs, tabsDetails }) => {
 
     const context = useContext(Context)
 
-    const [ tab1, tab2 ] = tabs;
+    const [ tab1, tab2 ] = tabsDetails;
     const tab1Index = tab1.index;
     const tab2Index = tab2.index;
 
     const [ activeTabIndex, setActiveTabIndex ] = useState(tab1Index)
 
     const tabClick = (tabIndex) => {
-        context.setValue({
-            activeHomeTabIndex: tabIndex
-        })
         setActiveTabIndex(tabIndex)
+        context.setValue({
+            ...context.value,
+            tabs: [{
+                ...pageTabs,
+                isTabOneActive: tabIndex === 0 ? true : false
+            }]
+        })
     }
 
     const setClassName = (tabIndex) => {
