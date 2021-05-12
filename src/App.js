@@ -1,18 +1,19 @@
 // import logo from './logo.svg';
 import './App.css';
-
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   // Link
 } from "react-router-dom";
-
 import Index from './pages/index/index'
-
 import Context from './context'
-
 import { useState, useMemo } from 'react'
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://onmhtrttxuqkpgzbcmrg.supabase.co'
+const supabaseKey = process.env.REACT_APP_SUPABASE_KEY
+export const supabase = createClient(supabaseUrl, supabaseKey)
 
 const pages = {
   index: "index"
@@ -22,7 +23,8 @@ const defaultContextValue = {
   tabs: [
     { page: pages.index, isTabOneActive: true }
   ],
-  getPageTabs: (page, tabs) => { return tabs.filter((tab) => tab.page === page)[0] }
+  getPageTabs: (page, tabs) => { return tabs.filter((tab) => tab.page === page)[0] },
+  supabase: supabase
 }
 
 function App() {
