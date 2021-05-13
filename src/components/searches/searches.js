@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import searchStyles from './search.module.scss'
 import { supabase } from '../../App'
-// import { timeAgo } from '../../lib/timeago'
+import { timeAgo, getTime } from '../../lib/time'
 
 const Searches = ({ pageTabs }) => {
     
     const [ searches, setSearches ] = useState([])
     
+    //returns a memoized callback to ensure that the effect is only called when 
+    //dependencies (pageTabs.isTabOneActive) changes
     const getSearches = useCallback(async () => {
         let { data: searches, error } = await supabase
             .from('searches')
@@ -30,9 +32,7 @@ const Searches = ({ pageTabs }) => {
                             <p>{description}</p>
                             <div className={searchStyles.footer}>
                                 { isFound && <p className={searchStyles.found}>found :)</p>}
-                                {/* <p>{suggestionCount} suggestions</p> */}
-                                {/* <p>searched {createdAt}</p> */}
-                                { console.log(typeof(createdAt)) }
+                                <p>searched {timeAgo.format(getTime(createdAt))}</p>
                             </div>
                         </div>
                 )
