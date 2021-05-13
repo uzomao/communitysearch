@@ -3,20 +3,18 @@ import searchStyles from './search.module.scss'
 import { supabase } from '../../App'
 
 const Searches = ({ pageTabs }) => {
-
-    // const filteredSearches = searches.filter(({ isInCommunity }) => pageTabs.isTabOneActive ?
-    //                                                         isInCommunity === true : isInCommunity === false)
     
     const [ searches, setSearches ] = useState([])
 
     useEffect(() => {
         getSearches().catch(console.error);
-    }, []);
+    });
     
     const getSearches = async () => {
         let { data: searches, error } = await supabase
             .from('searches')
             .select('*')
+            .eq('isInCommunity', pageTabs.isTabOneActive)
             .order("id", { ascending: false });
             if (error) console.log("error", error);
             setSearches(searches);
