@@ -7,6 +7,7 @@ import {
   // Link
 } from "react-router-dom";
 import Index from './pages/index/index'
+import Search from './pages/search/search'
 import Context from './context'
 import { useState, useMemo } from 'react'
 import { createClient } from '@supabase/supabase-js'
@@ -39,6 +40,9 @@ function App() {
         <Context.Provider value={providerValue}>
           <Route exact path='/'>
             <Index page={pages.index} />
+          </Route>
+          <Route path='/search/:id'>
+            <Search />
           </Route>
         </Context.Provider>
       </Switch>

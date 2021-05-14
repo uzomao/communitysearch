@@ -1,0 +1,17 @@
+@import '../../styles/config';
+
+.content {
+    margin: $align-content;
+
+    h3 {
+        text-align: center;
+    }
+
+    p {
+        text-align: justify;
+    }
+
+    .date {
+        margin-top: 1.5rem;
+    }
+}

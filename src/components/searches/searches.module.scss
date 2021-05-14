@@ -1,4 +1,4 @@
-@import '../../styles//config';
+@import '../../styles/config';
 
 .search {
     text-align: center;
@@ -7,10 +7,6 @@
 
     h3 {
         color: $text-color
-    }
-
-    p {
-        font-family: $text-font;
     }
 
     &:first-child {

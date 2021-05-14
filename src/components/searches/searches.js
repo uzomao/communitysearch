@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import searchStyles from './search.module.scss'
+import searchStyles from './searches.module.scss'
 import { supabase } from '../../App'
 import { timeAgo, getTime } from '../../lib/time'
+import { Link } from 'react-router-dom'
 
 const Searches = ({ pageTabs }) => {
     
@@ -26,15 +27,19 @@ const Searches = ({ pageTabs }) => {
     return (
         <div>
             {
-                searches.map(({ title, description, createdAt, isFound }, index) =>
-                        <div key={index} className={searchStyles.search}>
-                            <h3>{title}</h3>
-                            <p>{description}</p>
-                            <div className={searchStyles.footer}>
-                                { isFound && <p className={searchStyles.found}>found :)</p>}
-                                <p>searched {timeAgo.format(getTime(createdAt))}</p>
-                            </div>
+                searches.map(({ id, title, description, createdAt, isFound }, index) =>
+                        
+                        <div className={searchStyles.search} key={index}>
+                            <Link to={`/search/${id}`}  className='default-link'>
+                                <h3>{title}</h3>
+                                <p>{description}</p>
+                                <div className={searchStyles.footer}>
+                                    { isFound && <p className={searchStyles.found}>found :)</p>}
+                                    <p>searched {timeAgo.format(getTime(createdAt))}</p>
+                                </div>
+                            </Link>
                         </div>
+                        
                 )
             }
         </div>
