@@ -5,15 +5,15 @@ import searchStyle from './search.module.scss'
 
 const Search = ({ location }) => {
 
-    const search = location.state.search
+    const { title, description, createdAt } = location.state.search
 
     return (
         <div>
             <Header />
             <div className={searchStyle.content}>
-                <h3>{search.title}</h3>
-                <p>{search.description}</p>
-                <p className={searchStyle.date}>Searched {timeAgo.format(getTime(search.createdAt))}</p>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <p className={searchStyle.date}>Searched {timeAgo.format(getTime(createdAt))}</p>
             </div>
         </div>
     )
