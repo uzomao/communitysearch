@@ -41,9 +41,7 @@ function App() {
           <Route exact path='/'>
             <Index page={pages.index} />
           </Route>
-          <Route path='/search/:id'>
-            <Search />
-          </Route>
+          <Route path='/search/:id' component={Search} />
         </Context.Provider>
       </Switch>
     </Router>

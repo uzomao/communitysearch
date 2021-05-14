@@ -30,7 +30,15 @@ const Searches = ({ pageTabs }) => {
                 searches.map(({ id, title, description, createdAt, isFound }, index) =>
                         
                         <div className={searchStyles.search} key={index}>
-                            <Link to={`/search/${id}`}  className='default-link'>
+                            <Link 
+                                to={{
+                                    pathname: `/search/${id}`,
+                                    state: {
+                                        search: { id: id, title: title, description: description, createdAt: createdAt}
+                                    }
+                                }}
+                                className='default-link'
+                            >
                                 <h3>{title}</h3>
                                 <p>{description}</p>
                                 <div className={searchStyles.footer}>
