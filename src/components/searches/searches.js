@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import searchStyles from './searches.module.scss'
 import { supabase } from '../../App'
-import { timeAgo, getTime } from '../../lib/time'
+import { getTime } from '../../lib/helpers'
 import { Link } from 'react-router-dom'
 
 const Searches = ({ pageTabs }) => {
@@ -27,28 +27,30 @@ const Searches = ({ pageTabs }) => {
     return (
         <div>
             {
-                searches.map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) =>
+                searches.map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
                         
-                        <div className={searchStyles.search} key={index}>
+                        const searchTitle = `${name} is looking for a ${category.toLowerCase()}: ${title}`
+
+                        return <div className={searchStyles.search} key={index}>
                             <Link 
                                 to={{
                                     pathname: `/search/${id}`,
                                     state: {
-                                        search: { id: id, title: title, description: description, createdAt: createdAt}
+                                        search: { id: id, title: searchTitle, description: description, createdAt: createdAt}
                                     }
                                 }}
                                 className='default-link'
                             >
-                                <h3>{name} is looking for a {category.toLowerCase()}: {title}</h3>
+                                <h3>{searchTitle}</h3>
                                 <p>{description}</p>
                                 <div className={searchStyles.footer}>
                                     { isFound && <p className={searchStyles.found}>found :)</p>}
-                                    <p>searched {timeAgo.format(getTime(createdAt))}</p>
+                                    <p>searched {getTime(createdAt)}</p>
                                 </div>
                             </Link>
                         </div>
                         
-                )
+                })
             }
         </div>
     )

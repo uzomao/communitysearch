@@ -8,11 +8,16 @@ $active-tab-color: rgba(210, 212, 213, 0.5);
 $text-font: Courier, 'Courier New', monospace;
 $title-font: Helvetica, Arial, sans-serif;
 
-$text-font-size: 21px;
+$text-subtext-size: 16px;
+$text-font-size: 18px;
+$text-heading-size: 22px;
 
 // Spacing
 $header-margin: 1rem 2rem 3rem 2rem;
 $align-content: 0rem 8rem;
+$content-padding: 1.5rem 8rem;
+
+$margin-spacing: 2rem;
 
 //Border
 $default-border: 2px solid #000;

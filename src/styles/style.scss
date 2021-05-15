@@ -22,7 +22,19 @@ h1, h2, h3, h4, h5, h6 {
 p { 
     font-family: $text-font;
     color: $text-color;
+    font-size: $text-font-size
 }
+
+p.heading {
+    color: $black;
+    font-size: $text-heading-size;
+}
+
+p.subtext {
+    font-size: $text-subtext-size
+}
+
+.mt { margin-top: $margin-spacing !important } .mb { margin-bottom: $margin-spacing !important }
 
 .default-link {
     text-decoration: none;
