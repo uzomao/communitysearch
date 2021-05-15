@@ -2,6 +2,7 @@
 $grey: #c4c4c4;
 $text-color: #333;
 $black: #000;
+$white: #f4f4f4;
 $active-tab-color: rgba(210, 212, 213, 0.5); 
 
 // Fonts
@@ -20,5 +21,6 @@ $content-padding: 1.5rem 8rem;
 $margin-spacing: 2rem;
 
 //Border
-$default-border: 2px solid #000;
-$grey-border: 2px solid #c4c4c4;
+$default-border: 2px solid $black;
+$grey-border: 2px solid $grey;
+$input-border: 2px solid $text-color; 

@@ -34,6 +34,14 @@ p.subtext {
     font-size: $text-subtext-size
 }
 
+input, textarea {
+    font-size: $text-font-size;
+    font-family: $text-font;
+    color: $text-color;
+    padding: 1rem;
+    outline: none;
+}
+
 .mt { margin-top: $margin-spacing !important } .mb { margin-bottom: $margin-spacing !important }
 
 .default-link {
@@ -43,6 +51,19 @@ p.subtext {
 
 .default-link:hover {
     color: #000;
+}
+
+.default-button {
+    @extend %text-btn;
+    background: $grey !important;
+    width: 7.5rem; height: 7.5rem;
+    text-decoration: none !important;
+    border-radius: 100%;
+    color: $white;
+}
+
+.default-button:hover {
+    background: $text-color !important;
 }
 
 @import 'buttons';

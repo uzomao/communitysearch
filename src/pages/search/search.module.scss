@@ -23,12 +23,34 @@
         border-top: $grey-border;
 
         .content {
-            margin: $align-content;
+            h3, div:not(.footer) {
+                margin: $align-content;
+            }
+
+            .greyline {
+                margin: 2rem 4rem !important;
+            }
+
+            .greyline {
+                border-bottom: $grey-border;
+            }
         }
 
         .footer {
             display: flex;
             justify-content: space-between;
         }
+    }
+
+    .addsuggestion {
+        
+        textarea {
+            height: 20rem;
+            width: 50%;
+            margin: 0 auto;
+            border: $input-border;
+            display: flex; justify-content: center;
+        }
+
     }
 }

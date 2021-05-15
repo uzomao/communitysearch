@@ -5,12 +5,16 @@
     cursor: pointer;
 }
   
-.text-btn {
+%text-btn {
     @extend %btn-style-overrides;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
     text-decoration: 2px underline;
     font-size: 21px;
+}
+
+.text-btn {
+    @extend %text-btn;
 }
 
 .text-btn:hover {
