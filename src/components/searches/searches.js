@@ -12,8 +12,8 @@ const Searches = ({ pageTabs }) => {
     //dependencies (pageTabs.isTabOneActive) changes
     const getSearches = useCallback(async () => {
         let { data: searches, error } = await supabase
-            .from('searches')
-            .select('*')
+            .from("searches")
+            .select("*, person!personId(*)")
             .eq('isInCommunity', pageTabs.isTabOneActive)
             .order("id", { ascending: false });
             if (error) console.log("error", error);
@@ -27,7 +27,7 @@ const Searches = ({ pageTabs }) => {
     return (
         <div>
             {
-                searches.map(({ id, title, description, createdAt, isFound }, index) =>
+                searches.map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) =>
                         
                         <div className={searchStyles.search} key={index}>
                             <Link 
@@ -39,7 +39,7 @@ const Searches = ({ pageTabs }) => {
                                 }}
                                 className='default-link'
                             >
-                                <h3>{title}</h3>
+                                <h3>{name} is looking for a {category.toLowerCase()}: {title}</h3>
                                 <p>{description}</p>
                                 <div className={searchStyles.footer}>
                                     { isFound && <p className={searchStyles.found}>found :)</p>}
