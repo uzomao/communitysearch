@@ -36,10 +36,24 @@ const Suggestions = ({ searchId }) => {
         else {
             const newSuggestion = {person: {name: currentUser.name}, ...suggestion[0]}
             setSuggestions([newSuggestion, ...suggestions])
-            console.log(newSuggestion)
             suggestionBox.value = ""
             setErrorText(null)
         }
+    }
+
+    const upvoteSuggestion = async (suggestionId, name, upvoteCount) => {
+        const { data:suggestion, error } = await supabase
+            .from('suggestions')
+            .update({ 'upvoteCount': upvoteCount+1 })
+            .eq('id', suggestionId)
+            if (error) console.log("error", error);
+            else {
+                const updatedSuggestion = {person: {name: name}, ...suggestion[0]}
+                const index = suggestions.findIndex((suggestion) => suggestion.id === suggestionId)
+                setSuggestions([suggestions[index] = updatedSuggestion, 
+                    ...suggestions.filter((suggestion) => suggestion.id !== suggestionId)
+                ])
+            }
     }
 
     useEffect(() => {
@@ -55,13 +69,18 @@ const Suggestions = ({ searchId }) => {
                         <>
                         <h3>{pluralize(suggestions.length, 'Suggestion', 'Suggestions')}</h3>
                         {
-                            suggestions.map(({ body, upvoteCount, createdAt, person: { name } }, index) => 
+                            suggestions.map(({ id, body, upvoteCount, createdAt, person: { name } }, index) => 
                                 <span key={index}>
                                 <div>
                                     <p className="heading">{name}</p>
                                     <p>{body}</p>
                                     <div className={suggestionsStyle.footer}>
-                                        <p className="subtext">{pluralize(upvoteCount, 'upvote', 'upvotes')}</p>
+                                        <p className="subtext">
+                                            {pluralize(upvoteCount, 'upvote', 'upvotes')} •{` `}
+                                            <span className={`text-btn ${suggestionsStyle.upvote}`} onClick={() => upvoteSuggestion(id, name, upvoteCount)}>
+                                                +1
+                                            </span>
+                                        </p>
                                         <p className="subtext">Suggested { createdAt ? getTime(createdAt) : `just now`}</p>
                                     </div>
                                 </div>
