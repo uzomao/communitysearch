@@ -49,32 +49,34 @@ const Suggestions = ({ searchId }) => {
     return (
         <>
             <div className={suggestionsStyle.suggestions}>
+                <div className={`mt ${suggestionsStyle.content}`}>
                 {
                     suggestions.length > 0 ?
-                        <div className={`mt ${suggestionsStyle.content}`}>
-                            <h3>{pluralize(suggestions.length, 'Suggestion', 'Suggestions')}</h3>
-                            {
-                                suggestions.map(({ body, upvoteCount, createdAt, person: { name } }, index) => 
-                                    <span key={index}>
-                                    <div>
-                                        <p className="heading">{name}</p>
-                                        <p>{body}</p>
-                                        <div className={suggestionsStyle.footer}>
-                                            <p className="subtext">{pluralize(upvoteCount, 'upvote', 'upvotes')}</p>
-                                            <p className="subtext">Searched { createdAt ? getTime(createdAt) : `just now`}</p>
-                                        </div>
+                        <>
+                        <h3>{pluralize(suggestions.length, 'Suggestion', 'Suggestions')}</h3>
+                        {
+                            suggestions.map(({ body, upvoteCount, createdAt, person: { name } }, index) => 
+                                <span key={index}>
+                                <div>
+                                    <p className="heading">{name}</p>
+                                    <p>{body}</p>
+                                    <div className={suggestionsStyle.footer}>
+                                        <p className="subtext">{pluralize(upvoteCount, 'upvote', 'upvotes')}</p>
+                                        <p className="subtext">Suggested { createdAt ? getTime(createdAt) : `just now`}</p>
                                     </div>
-                                    <div className={suggestionsStyle.greyline}></div>
-                                    </span>
-                                )
-                            }
-                        </div>
+                                </div>
+                                <div className={suggestionsStyle.greyline}></div>
+                                </span>
+                            )
+                        }
+                        </>
                         :
-                        <div className={`mt ${suggestionsStyle.content}`}>
+                        <div>
                             <p>No suggestions yet.</p>
                             <p>Be the first to suggest something.</p>
                         </div>                        
                 }
+                </div>
             </div>
 
             <div className={`mb ${suggestionsStyle.addsuggestion}`}>
