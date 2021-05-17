@@ -25,7 +25,10 @@ const defaultContextValue = {
     { page: pages.index, isTabOneActive: true }
   ],
   getPageTabs: (page, tabs) => { return tabs.filter((tab) => tab.page === page)[0] },
-  supabase: supabase
+  currentUser: {
+    id: 1,
+    name: 'uzoma'
+  } // TODO: this should be generated programatically
 }
 
 function App() {

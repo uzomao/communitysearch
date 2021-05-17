@@ -34,6 +34,10 @@ p.subtext {
     font-size: $text-subtext-size
 }
 
+p.error {
+    color: $red;
+}
+
 input, textarea {
     font-size: $text-font-size;
     font-family: $text-font;

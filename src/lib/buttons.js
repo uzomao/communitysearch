@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Buttons = ({ btnText }) => {
+const Buttons = ({ btnText, isDoubleBtn=false, onClick }) => {
 
     const btnStyle = {
         display: 'flex',
@@ -8,10 +8,17 @@ const Buttons = ({ btnText }) => {
         width: '100%'
     }
     return (
-        <div style={btnStyle}>
-            <button className="default-button">{btnText}</button>
-            <button className="default-button">{btnText}</button>
-        </div>
+        <>
+        {
+            isDoubleBtn ?
+                <div style={btnStyle}>
+                    <button className="default-button" onClick={onClick}>{btnText}</button>
+                    <button className="default-button" onClick={onClick}>{btnText}</button>
+                </div>
+            :
+                <button className="default-button" onClick={onClick}>{btnText}</button>
+        }
+        </>
     )
 }
 
