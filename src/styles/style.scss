@@ -38,12 +38,24 @@ p.error {
     color: $red;
 }
 
+.heading {
+    text-align: center;
+}
+
 input, textarea {
     font-size: $text-font-size;
     font-family: $text-font;
     color: $text-color;
     padding: 1rem;
     outline: none;
+}
+
+.dropdown {
+    appearance: none;
+    border: $input-border;
+    font-family: $text-font;
+    font-size: $text-font-size;
+    color: $text-color;
 }
 
 .mt { margin-top: $margin-spacing !important } .mb { margin-bottom: $margin-spacing !important }

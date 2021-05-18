@@ -11,7 +11,7 @@ const Buttons = ({ btnText, isDoubleBtn=false, onClick }) => {
         <>
         {
             isDoubleBtn ?
-                <div style={btnStyle}>
+                <div style={btnStyle} className='mb'>
                     <button className="default-button" onClick={onClick}>{btnText}</button>
                     <button className="default-button" onClick={onClick}>{btnText}</button>
                 </div>

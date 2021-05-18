@@ -10,7 +10,9 @@ const Header = () => {
             </h2>
 
             <div className={headerStyles.right}>
-                <button className={headerStyles.button}>find something</button>
+                <Link to='/post' className={headerStyles.button}>
+                    find something
+                </Link>
                 <div className={headerStyles.logo}></div>
             </div>
         </header>

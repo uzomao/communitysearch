@@ -1,0 +1,29 @@
+@import '../../styles/config';
+
+.main {
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: $align-content;
+
+        .dropdown {
+            width: 20%;
+            height: 2rem;
+            align-self: flex-start;
+            margin: $align-content;
+        }
+
+        .element {
+            border: $input-border;
+            display: flex; justify-content: center;
+            width: 75%;
+        }
+
+        textarea {
+            height: 15rem;
+        }
+    }
+
+}

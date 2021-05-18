@@ -19,13 +19,18 @@
 
 .button {
     font-family: $text-font;
-    font-size: $text-font-size;
+    font-size: $text-heading-size;
     border: $default-border;
     outline: none;
     background: none;
     width: 16rem;
     margin-right: 2rem;
     cursor: pointer;
+    color: $text-color;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
         background: #1e272e;

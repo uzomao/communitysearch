@@ -98,7 +98,7 @@ const Suggestions = ({ searchId }) => {
                 </div>
             </div>
 
-            <div className={`mb ${suggestionsStyle.addsuggestion}`}>
+            <div className={suggestionsStyle.addsuggestion}>
                 {
                     errorText && <p className="error">{errorText}</p>
                 }
