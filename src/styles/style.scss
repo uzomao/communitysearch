@@ -38,11 +38,17 @@ p.error {
     color: $red;
 }
 
+p.success-msg {
+    color: $green;
+    text-align: center !important;
+    font-weight: bold;
+}
+
 .heading {
     text-align: center;
 }
 
-input, textarea {
+input, textarea, label {
     font-size: $text-font-size;
     font-family: $text-font;
     color: $text-color;

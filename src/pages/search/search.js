@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/header/header'
 import { getTime } from '../../lib/helpers'
 import searchStyle from './search.module.scss'
@@ -9,6 +9,13 @@ import { Link } from 'react-router-dom'
 const Search = ({ location }) => {
 
     const { id, title, description, createdAt } = location.state.search // TODO: query db if this is null, for people not coming here from index page
+    const [ successMsg, setSuccessMsg ] = useState(location.state.successMsg) //TODO: consider that there might not be location state
+
+    useEffect(() => {
+        if(successMsg){
+            window.setTimeout(() => setSuccessMsg(null), 3000)
+        }
+    })
 
     return (
         <div className={searchStyle.content}>
@@ -16,6 +23,7 @@ const Search = ({ location }) => {
 
             <div className={searchStyle.main}>
                 <h2>{title}</h2>
+                { successMsg && <p className="mt mb success-msg">{successMsg}</p>}
                 <p>{description}</p>
                 <div className={searchStyle.footer}>
                     <p className={searchStyle.date}>Searched {getTime(createdAt)}</p>

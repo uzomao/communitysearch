@@ -1,5 +1,7 @@
 @import '../../styles/config';
 
+$form-width: 75%;
+
 .main {
 
     .form {
@@ -12,17 +14,28 @@
             width: 20%;
             height: 2rem;
             align-self: flex-start;
-            margin: $align-content;
+            margin: 0 7.5rem;
+
+            &::after {
+                content: ' »';
+            }
         }
 
         .element {
             border: $input-border;
             display: flex; justify-content: center;
-            width: 75%;
+            width: $form-width;
         }
 
         textarea {
             height: 15rem;
+        }
+
+        .radiobtns {
+            width: $form-width;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
 
