@@ -4,7 +4,7 @@ import { getTime } from '../../lib/helpers'
 import searchStyle from './search.module.scss'
 import Suggestions from '../../components/suggestions/suggestions'
 import Buttons from '../../lib/buttons'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { supabase } from '../../App'
 
 const Search = ({ location }) => {
@@ -44,9 +44,9 @@ const Search = ({ location }) => {
                         <div className={searchStyle.footer}>
                             <p className={searchStyle.date}>Searched {getTime(search.createdAt)}</p>
                             <div>
-                                <Link to="#suggestion-box">
+                                <a href="#suggest">
                                     <Buttons btnText="suggest something" />
-                                </Link>
+                                </a>
                                 <Buttons btnText="notify someone" />
                             </div>
                         </div>

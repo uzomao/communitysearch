@@ -140,7 +140,7 @@ const Suggestions = ({ searchId }) => {
                 {
                     errorText && <p className="error">{errorText}</p>
                 }
-                <textarea id="suggestion-box" className='mt mb' placeholder="Suggest something...">
+                <textarea id="suggest" className='mt mb' placeholder="Suggest something...">
                 </textarea>
 
                 <Buttons btnText="Suggest!" isDoubleBtn={true} onClick={ () => addSuggestion() } />
