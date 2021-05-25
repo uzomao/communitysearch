@@ -4,6 +4,7 @@ import { supabase } from '../../App'
 import { getTime, pluralize } from '../../lib/helpers'
 import suggestionsStyle from './suggestions.module.scss'
 import Context from '../../context'
+import Replies from '../replies/replies'
 
 const Suggestions = ({ searchId }) => {
     const [ suggestions, setSuggestions ] = useState([])
@@ -86,7 +87,7 @@ const Suggestions = ({ searchId }) => {
                         <div className={`mt mb ${suggestionsStyle.header}`}>
                             <h3>{pluralize(suggestions.length, 'Suggestion', 'Suggestions')}</h3>
                             <div className={suggestionsStyle.filters}>
-                                <button className="text-btn-regular" id={filterByOldest} onClick={() => createFilter(filterByOldest)}>{filterByOldest}</button>
+                                <button style={{textDecoration: 'underline'}} className="text-btn-regular" id={filterByOldest} onClick={() => createFilter(filterByOldest)}>{filterByOldest}</button>
                                 <button className="text-btn-regular" id={filterByNewest} onClick={() => createFilter(filterByNewest)}>{filterByNewest}</button>
                                 <button className="text-btn-regular" id={filterByVotes} onClick={() => createFilter(filterByVotes)}>{filterByVotes}</button>
                             </div>
@@ -99,6 +100,10 @@ const Suggestions = ({ searchId }) => {
                                     <p>{body}</p>
                                     <div className={suggestionsStyle.footer}>
                                         <p className="subtext">
+                                            <button className="text-btn-regular" style={{paddingLeft: '0' }}>
+                                                <span className={`subtext text-btn ${suggestionsStyle.upvote}`}>Reply</span>
+                                            </button>
+                                            { `| `}
                                             {pluralize(upvoteCount, 'upvote', 'upvotes')} •{` `}
                                             <span className={`text-btn ${suggestionsStyle.upvote}`} onClick={() => upvoteSuggestion(id, name, upvoteCount)}>
                                                 +1
@@ -107,6 +112,7 @@ const Suggestions = ({ searchId }) => {
                                         <p className="subtext">Suggested { createdAt ? getTime(createdAt) : `just now`}</p>
                                     </div>
                                 </div>
+                                <Replies suggestionId={id} />
                                 <div className={suggestionsStyle.greyline}></div>
                                 </span>
                             )

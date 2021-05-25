@@ -1,0 +1,11 @@
+@import '../../styles/config';
+
+.reply {
+    border-left: $grey-border;
+    margin-left: $margin-spacing;
+    padding-left: 1rem; padding-bottom: 2rem;
+
+    span {
+        color: $black;
+    }
+}
