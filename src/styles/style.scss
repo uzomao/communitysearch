@@ -56,6 +56,10 @@ input, textarea, label {
     outline: none;
 }
 
+input, textarea { 
+    border: $input-border;
+}
+
 .dropdown {
     appearance: none;
     border: $input-border;

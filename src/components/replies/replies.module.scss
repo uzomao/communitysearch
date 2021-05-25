@@ -1,5 +1,29 @@
 @import '../../styles/config';
 
+.form {
+    margin-left: 2rem !important;
+    margin-right: 0 !important;
+    width: 100%;
+
+    input {
+        width: 70%;
+        padding: .5rem !important;
+    }
+
+    button {
+        text-decoration: underline;
+    }
+
+    button:hover {
+        color: $black;
+    }
+
+    .close {
+        color: red;
+        font-size: $text-heading-size;
+    }
+}
+
 .reply {
     border-left: $grey-border;
     margin-left: $margin-spacing;

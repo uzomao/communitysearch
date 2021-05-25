@@ -10,6 +10,7 @@ const Suggestions = ({ searchId }) => {
     const [ suggestions, setSuggestions ] = useState([])
     const [ errorText, setErrorText ] = useState('')
     const { currentUser } = useContext(Context).value
+    const [ enableReplyForSuggestionId, setEnableReplyForSuggestionId ] = useState(null)
 
     const filterByOldest = 'oldest'
     const filterByNewest = 'newest'
@@ -77,6 +78,10 @@ const Suggestions = ({ searchId }) => {
         getSuggestions().catch(console.error)
     }, [getSuggestions])
 
+    const closeReplyBox = () => {
+        setEnableReplyForSuggestionId(null)
+    }
+
     return (
         <>
             <div className={suggestionsStyle.suggestions}>
@@ -101,7 +106,11 @@ const Suggestions = ({ searchId }) => {
                                     <div className={suggestionsStyle.footer}>
                                         <p className="subtext">
                                             <button className="text-btn-regular" style={{paddingLeft: '0' }}>
-                                                <span className={`subtext text-btn ${suggestionsStyle.upvote}`}>Reply</span>
+                                                <span 
+                                                    className={`subtext text-btn ${suggestionsStyle.upvote}`} 
+                                                    onClick={() => setEnableReplyForSuggestionId(id)}>
+                                                        Reply
+                                                </span>
                                             </button>
                                             { `| `}
                                             {pluralize(upvoteCount, 'upvote', 'upvotes')} •{` `}
@@ -112,7 +121,7 @@ const Suggestions = ({ searchId }) => {
                                         <p className="subtext">Suggested { createdAt ? getTime(createdAt) : `just now`}</p>
                                     </div>
                                 </div>
-                                <Replies suggestionId={id} />
+                                <Replies suggestionId={id} enableReplyForSuggestionId={enableReplyForSuggestionId} closeReplyBox={closeReplyBox} />
                                 <div className={suggestionsStyle.greyline}></div>
                                 </span>
                             )
