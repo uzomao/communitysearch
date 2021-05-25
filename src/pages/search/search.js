@@ -4,12 +4,24 @@ import { getTime } from '../../lib/helpers'
 import searchStyle from './search.module.scss'
 import Suggestions from '../../components/suggestions/suggestions'
 import Buttons from '../../lib/buttons'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { supabase } from '../../App'
 
 const Search = ({ location }) => {
 
-    const { id, title, description, createdAt } = location.state.search // TODO: query db if this is null, for people not coming here from index page
-    const [ successMsg, setSuccessMsg ] = useState(location.state.successMsg) //TODO: consider that there might not be location state
+    const searchId = useParams().id
+
+    const getSearch = async () => {
+        let { data: searches, error } = await supabase
+            .from('searches')
+            .select('*')
+            .eq('id', searchId)
+            if (error) console.log("error", error);
+            return searches[0]
+    }
+
+    const search = location.state ? location.state.search : getSearch()
+    const [ successMsg, setSuccessMsg ] = useState(location.state ? location.state.successMsg : null)
 
     useEffect(() => {
         if(successMsg){
@@ -17,24 +29,29 @@ const Search = ({ location }) => {
         }
     })
 
+    const { id, title, description, createdAt } = search
+
     return (
         <div className={searchStyle.content}>
             <Header />
 
-            <div className={searchStyle.main}>
-                <h2>{title}</h2>
-                { successMsg && <p className="mt mb success-msg">{successMsg}</p>}
-                <p>{description}</p>
-                <div className={searchStyle.footer}>
-                    <p className={searchStyle.date}>Searched {getTime(createdAt)}</p>
-                    <div>
-                        <Link to="#suggestion-box">
-                            <Buttons btnText="suggest something" />
-                        </Link>
-                        <Buttons btnText="notify someone" />
+            {
+                search &&
+                    <div className={searchStyle.main}>
+                        <h2>{title}</h2>
+                        { successMsg && <p className="mt mb success-msg">{successMsg}</p>}
+                        <p>{description}</p>
+                        <div className={searchStyle.footer}>
+                            <p className={searchStyle.date}>Searched {getTime(createdAt)}</p>
+                            <div>
+                                <Link to="#suggestion-box">
+                                    <Buttons btnText="suggest something" />
+                                </Link>
+                                <Buttons btnText="notify someone" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+            }
 
             <Suggestions searchId={id} />
         </div>
