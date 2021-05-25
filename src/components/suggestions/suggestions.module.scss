@@ -3,8 +3,17 @@
 .suggestions {
     border-top: $grey-border;
 
+    .header {
+        display: flex;
+        justify-content: space-between;
+
+        h3, div {
+            margin: 0 !important;
+        }
+    }
+
     .content {
-        h3, div:not(.footer) {
+        div:not(.footer) {
             margin: $align-content;
         }
 

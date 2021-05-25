@@ -48,7 +48,7 @@ const Post = () => {
             <Header />
 
             <main className={postStyle.main}>
-                <h1 className="heading">find something</h1>
+                <h1 className="page-heading">find something</h1>
 
                 {
                     errorText && <p className="error">{errorText}</p>

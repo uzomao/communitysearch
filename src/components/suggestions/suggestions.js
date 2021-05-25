@@ -10,15 +10,31 @@ const Suggestions = ({ searchId }) => {
     const [ errorText, setErrorText ] = useState('')
     const { currentUser } = useContext(Context).value
 
+    const filterByOldest = 'oldest'
+    const filterByNewest = 'newest'
+    const filterByVotes = 'votes'
+
+    const [ filter, setFilter ] = useState(filterByOldest)
+
+    const createFilter = ( filterParam ) => {
+        document.getElementById(filter).style.textDecoration = 'none';
+        setFilter(filterParam)
+        document.getElementById(filterParam).style.textDecoration = 'underline';
+    }
+
     const getSuggestions = useCallback(async () => {
+        
+        const filterParam = filter === filterByVotes ? "upvoteCount" : "createdAt"
+        const filterValue = filter === filterByOldest ? { ascending: true } : { ascending : false }
+
         let { data: suggestions, error } = await supabase
             .from('suggestions')
             .select('*, person!authorId(name)')
             .eq('searchId', searchId)
-            .order("createdAt", { ascending: true });
+            .order(filterParam, filterValue);
             if (error) console.log("error", error);
             setSuggestions(suggestions);
-    }, [searchId])
+    }, [searchId, filter])
 
     const addSuggestion = async () => {
         const suggestionBox = document.getElementById('suggestion-box')
@@ -67,7 +83,14 @@ const Suggestions = ({ searchId }) => {
                 {
                     suggestions.length > 0 ?
                         <>
-                        <h3>{pluralize(suggestions.length, 'Suggestion', 'Suggestions')}</h3>
+                        <div className={`mt mb ${suggestionsStyle.header}`}>
+                            <h3>{pluralize(suggestions.length, 'Suggestion', 'Suggestions')}</h3>
+                            <div className={suggestionsStyle.filters}>
+                                <button className="text-btn-regular" id={filterByOldest} onClick={() => createFilter(filterByOldest)}>{filterByOldest}</button>
+                                <button className="text-btn-regular" id={filterByNewest} onClick={() => createFilter(filterByNewest)}>{filterByNewest}</button>
+                                <button className="text-btn-regular" id={filterByVotes} onClick={() => createFilter(filterByVotes)}>{filterByVotes}</button>
+                            </div>
+                        </div>
                         {
                             suggestions.map(({ id, body, upvoteCount, createdAt, person: { name } }, index) => 
                                 <span key={index}>

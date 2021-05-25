@@ -17,6 +17,13 @@
     @extend %text-btn;
 }
 
+.text-btn-regular {
+    @extend %btn-style-overrides;
+    font-family: $text-font;
+    font-size: $text-font-size;
+    color: $text-color;
+}
+
 .text-btn:hover {
     color: $text-color;
 }
