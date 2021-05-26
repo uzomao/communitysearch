@@ -4,7 +4,7 @@ import { supabase } from '../../App'
 import { getTime } from '../../lib/helpers'
 import { Link } from 'react-router-dom'
 
-const Searches = ({ pageTabs }) => {
+const Searches = ({ pageTabs, filter }) => {
     
     const [ searches, setSearches ] = useState([])
     
@@ -20,9 +20,22 @@ const Searches = ({ pageTabs }) => {
             setSearches(searches);
     }, [pageTabs.isTabOneActive])
 
+    //there must be a more intelligent way to do this ffs
+    const getSearchesWithFilter = useCallback(async () => {
+        let { data: searches, error } = await supabase
+            .from("searches")
+            .select("*, person!personId(*)")
+            .eq('isInCommunity', pageTabs.isTabOneActive)
+            .eq('category', filter)
+            .order("id", { ascending: false });
+            if (error) console.log("error", error);
+            setSearches(searches);
+    }, [pageTabs.isTabOneActive, filter])
+
+
     useEffect(() => {
-        getSearches().catch(console.error);
-    }, [getSearches]);
+        filter ? getSearchesWithFilter().catch(console.error) : getSearches().catch(console.error);
+    }, [getSearches, getSearchesWithFilter, filter]);
 
     return (
         <div>

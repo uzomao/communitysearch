@@ -1,0 +1,46 @@
+@import '../../styles/config';
+
+.container {
+
+    $height: 50vh;
+
+    width: 70%;
+
+    .filter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: $height;
+
+        div {
+
+            h3 {
+                margin-bottom: $margin-spacing;
+            }
+
+            h3, p {
+                text-align: center;
+            }
+        }
+
+        div.category {
+            width: 33.3%;
+        }
+
+        div.categories {
+            width: 100%;
+
+            button {
+                width: 50%;
+                display: inline-block;
+                text-align: center;
+                margin: .5rem 0;
+            }
+
+            button:hover {
+                color: $black; //TODO: move this hover effect to a central source for all buttons of this class
+            }
+        }
+    }
+
+}

@@ -92,4 +92,9 @@ input, textarea {
     background: $text-color !important;
 }
 
+.close-btn {
+    color: red;
+    font-size: $text-heading-size;
+}
+
 @import 'buttons';

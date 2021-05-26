@@ -1,12 +1,12 @@
 [
-    "books",
+    "book",
     "music",
     "film",
-    "tv shows",
-    "podcasts",
-    "videos",
+    "tv show",
+    "podcast",
+    "video",
     "art",
-    "articles",
+    "article",
     "web stuff",
     "other"
 ]

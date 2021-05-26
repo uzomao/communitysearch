@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import Header from '../../components/header/header'
 import Searches from '../../components/searches/searches'
@@ -15,6 +15,8 @@ const Index = ({ page }) => {
 
     const pageTabs = getPageTabs(page, tabs)
 
+    const [ filter, setFilter ] = useState(null)
+
     return (
         <div>
             <Header />
@@ -27,13 +29,13 @@ const Index = ({ page }) => {
                 ]}
             />
             <div className={indexStyles.filter}>
-                <Filter />
+                <Filter filter={filter} setFilter={setFilter} />
                 <div className={indexStyles.checkbox}>
                     <input type="checkbox" />
                     <p>show past searches</p>
                 </div>
             </div>
-            <Searches page={page} pageTabs={pageTabs} />
+            <Searches page={page} pageTabs={pageTabs} filter={filter} />
         </div>
     )
 }

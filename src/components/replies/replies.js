@@ -57,7 +57,7 @@ const Replies = ({ suggestionId, enableReplyForSuggestionId, closeReplyBox }) =>
                     <div className={`mt mb ${repliesStyle.form}`}>
                         <input type="text" ref={replyRef} />
                         <button className="text-btn-regular" onClick={() => closeReplyBox()}>
-                            <MdClose className={repliesStyle.close} />
+                            <MdClose className='close-btn' />
                         </button>
                         <button className="text-btn-regular" onClick={() => addReply()}>Reply</button>
                     </div>
