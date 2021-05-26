@@ -56,7 +56,13 @@ const Filter = ({ filter, setFilter }) => {
                         <button className="text-btn" style={{padding: 0}} onClick={() => setIsActive(true)}>
                             filter
                         </button>
-                        { filter && <p>showing searches for {filter}</p>}
+                        { 
+                            filter && 
+                                <div className={filterStyles.info}>
+                                    <p>showing searches for {filter}</p>
+                                    <button className="text-btn-regular" onClick={() => setFilter(null)}>clear</button>
+                                </div>
+                        }
                     </>
             }
         </div>

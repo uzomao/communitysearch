@@ -44,3 +44,18 @@
     }
 
 }
+
+.info {
+    display: flex;
+
+    button {
+        color: $black;
+        text-decoration: underline;
+        font-size: $text-subtext-size;
+        margin-left: .5rem;
+
+        &:hover {
+            color: $grey;
+        }
+    }
+}
