@@ -3,7 +3,7 @@ import filterStyles from './filter.module.scss'
 import categories from '../../categories.json'
 import { MdClose } from "react-icons/md";
 
-const Filter = ({ filter, setFilter }) => {
+const Filter = ({ filter, setFilter, setShowPastSearches }) => {
 
     const [ isActive, setIsActive ] = useState(false)
 
@@ -21,11 +21,11 @@ const Filter = ({ filter, setFilter }) => {
         <div className={filterStyles.container}>
             {
                 isActive ?
-                    <>
+                    <div>
                         <button className="text-btn-regular" onClick={() => setIsActive(false)}>
                             <MdClose className='close-btn' />
                         </button>
-                        <div className={filterStyles.filter}>
+                        <div className={`mt mb ${filterStyles.filter}`}>
                             <h3>filter by</h3>
                             <div className={filterStyles.category}>
                                 <h3>category</h3>
@@ -50,9 +50,9 @@ const Filter = ({ filter, setFilter }) => {
                                 <p>{random}</p>
                             </div>
                         </div>
-                    </>
+                    </div>
                     :
-                    <>
+                    <div>
                         <button className="text-btn" style={{padding: 0}} onClick={() => setIsActive(true)}>
                             filter
                         </button>
@@ -63,8 +63,12 @@ const Filter = ({ filter, setFilter }) => {
                                     <button className="text-btn-regular" onClick={() => setFilter(null)}>clear</button>
                                 </div>
                         }
-                    </>
+                    </div>
             }
+            <div className={filterStyles.checkbox}>
+                <input type="checkbox" onChange={e => setShowPastSearches(e.target.checked)} />
+                <p>show past searches</p>
+            </div>
         </div>
     )
 }

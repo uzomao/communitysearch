@@ -2,15 +2,15 @@
 
 .container {
 
-    $height: 50vh;
-
-    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: $header-margin;
+    align-items: center;
 
     .filter {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: $height;
 
         div {
 
@@ -57,5 +57,13 @@
         &:hover {
             color: $grey;
         }
+    }
+}
+
+.checkbox {
+    display: flex;
+
+    input {
+        margin-right: .5rem;
     }
 }

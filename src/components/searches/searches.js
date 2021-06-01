@@ -4,7 +4,7 @@ import { supabase } from '../../App'
 import { getTime } from '../../lib/helpers'
 import { Link } from 'react-router-dom'
 
-const Searches = ({ pageTabs, filter }) => {
+const Searches = ({ pageTabs, filter, showPastSearches }) => {
     
     const [ searches, setSearches ] = useState([])
     
@@ -17,30 +17,31 @@ const Searches = ({ pageTabs, filter }) => {
             .eq('isInCommunity', pageTabs.isTabOneActive)
             .order("id", { ascending: false });
             if (error) console.log("error", error);
-            setSearches(searches);
+            setSearches(searches)
     }, [pageTabs.isTabOneActive])
 
-    //there must be a more intelligent way to do this ffs
-    const getSearchesWithFilter = useCallback(async () => {
-        let { data: searches, error } = await supabase
-            .from("searches")
-            .select("*, person!personId(*)")
-            .eq('isInCommunity', pageTabs.isTabOneActive)
-            .eq('category', filter)
-            .order("id", { ascending: false });
-            if (error) console.log("error", error);
-            setSearches(searches);
-    }, [pageTabs.isTabOneActive, filter])
-
-
     useEffect(() => {
-        filter ? getSearchesWithFilter().catch(console.error) : getSearches().catch(console.error);
-    }, [getSearches, getSearchesWithFilter, filter]);
+        getSearches().catch(console.error);
+    }, [getSearches]);
+
+    const filterSearches = () => {
+        if(!showPastSearches && filter) {
+
+            return searches.filter(({ isFound }) => isFound === false).filter(({ category }) => category === filter)
+            
+        } else if(!showPastSearches){
+            return searches.filter(({ isFound }) => isFound === false)
+        } else if(filter){
+            return searches.filter(( { category } ) => category === filter)   
+        } else {
+            return searches
+        }
+    }
 
     return (
         <div>
             {
-                searches.map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
+                filterSearches().map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
                         
                         const searchTitle = `${name} is looking for a ${category.toLowerCase()}: ${title}`
 

@@ -16,6 +16,7 @@ const Index = ({ page }) => {
     const pageTabs = getPageTabs(page, tabs)
 
     const [ filter, setFilter ] = useState(null)
+    const [ showPastSearches, setShowPastSearches] = useState(false)
 
     return (
         <div>
@@ -29,13 +30,9 @@ const Index = ({ page }) => {
                 ]}
             />
             <div className={indexStyles.filter}>
-                <Filter filter={filter} setFilter={setFilter} />
-                <div className={indexStyles.checkbox}>
-                    <input type="checkbox" />
-                    <p>show past searches</p>
-                </div>
+                <Filter filter={filter} setFilter={setFilter} setShowPastSearches={setShowPastSearches} />
             </div>
-            <Searches page={page} pageTabs={pageTabs} filter={filter} />
+            <Searches page={page} pageTabs={pageTabs} filter={filter} showPastSearches={showPastSearches} />
         </div>
     )
 }
