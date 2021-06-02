@@ -5,11 +5,11 @@ import { getTime } from '../../lib/helpers'
 import { Link } from 'react-router-dom'
 import Context from '../../context'
 
-const Searches = ({ page, filter, showPastSearches, personId }) => {
+const Searches = ({ page, filter, showPastSearches, profileId }) => {
     
     const [ searches, setSearches ] = useState([])
 
-    const { tabs, getPageTabs, currentUser } = useContext(Context).value
+    const { tabs, getPageTabs } = useContext(Context).value
     const isTabOneActive = getPageTabs(page, tabs).isTabOneActive
     
     //returns a memoized callback to ensure that the effect is only called when 
@@ -25,7 +25,6 @@ const Searches = ({ page, filter, showPastSearches, personId }) => {
     }, [isTabOneActive])
 
     const profileGetSearches = useCallback(async () => {
-        const profileId = personId ? personId : currentUser.id
         let { data: searches, error } = await supabase
             .from("searches")
             .select("*, person!personId(*)")
@@ -33,7 +32,7 @@ const Searches = ({ page, filter, showPastSearches, personId }) => {
             .order("id", { ascending: false });
             if (error) console.log("error", error);
             setSearches(searches)
-    }, [currentUser.id, personId])
+    }, [profileId])
 
     useEffect(() => {
         page === pages.profile ? profileGetSearches().catch(console.error) : getSearches().catch(console.error);

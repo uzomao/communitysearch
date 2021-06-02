@@ -58,7 +58,7 @@ function App() {
           <Route path='/post'>
             <Post />
           </Route>
-          <Route path='/profile'>
+          <Route path='/profile/:id'>
             <Profile page={pages.profile} />
           </Route>
         </Context.Provider>
