@@ -9,6 +9,7 @@ import {
 import Index from './pages/index/index'
 import Search from './pages/search/search'
 import Post from './pages/post/post'
+import Profile from './pages/profile/profile'
 import Context from './context'
 import { useState, useMemo } from 'react'
 import { createClient } from '@supabase/supabase-js'
@@ -18,12 +19,20 @@ const supabaseKey = process.env.REACT_APP_SUPABASE_KEY
 export const supabase = createClient(supabaseUrl, supabaseKey)
 
 const pages = {
-  index: "index"
+  index: "index",
+  profile: "profile"
 }
 
 const defaultContextValue = {
   tabs: [
-    { page: pages.index, isTabOneActive: true }
+    { page: pages.index, 
+      tabNames: ['Your Community', 'The Larger Network'], 
+      isTabOneActive: true 
+    },
+    { page: pages.profile, 
+      tabNames: ['Searches', 'Suggestions'], 
+      isTabOneActive: true
+    }
   ],
   getPageTabs: (page, tabs) => { return tabs.filter((tab) => tab.page === page)[0] },
   currentUser: {
@@ -48,6 +57,9 @@ function App() {
           <Route path='/search/:id' component={Search} />
           <Route path='/post'>
             <Post />
+          </Route>
+          <Route path='/profile'>
+            <Profile page={pages.profile} />
           </Route>
         </Context.Provider>
       </Switch>

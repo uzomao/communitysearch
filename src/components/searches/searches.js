@@ -1,12 +1,16 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useContext } from 'react'
 import searchStyles from './searches.module.scss'
 import { supabase } from '../../App'
 import { getTime } from '../../lib/helpers'
 import { Link } from 'react-router-dom'
+import Context from '../../context'
 
-const Searches = ({ pageTabs, filter, showPastSearches }) => {
+const Searches = ({ page, filter, showPastSearches }) => {
     
     const [ searches, setSearches ] = useState([])
+
+    const { tabs, getPageTabs } = useContext(Context).value
+    const isTabOneActive = getPageTabs(page, tabs).isTabOneActive
     
     //returns a memoized callback to ensure that the effect is only called when 
     //dependencies (pageTabs.isTabOneActive) changes
@@ -14,11 +18,11 @@ const Searches = ({ pageTabs, filter, showPastSearches }) => {
         let { data: searches, error } = await supabase
             .from("searches")
             .select("*, person!personId(*)")
-            .eq('isInCommunity', pageTabs.isTabOneActive)
+            .eq('isInCommunity', isTabOneActive)
             .order("id", { ascending: false });
             if (error) console.log("error", error);
             setSearches(searches)
-    }, [pageTabs.isTabOneActive])
+    }, [isTabOneActive])
 
     useEffect(() => {
         getSearches().catch(console.error);
