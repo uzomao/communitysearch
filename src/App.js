@@ -18,7 +18,7 @@ const supabaseUrl = 'https://onmhtrttxuqkpgzbcmrg.supabase.co'
 const supabaseKey = process.env.REACT_APP_SUPABASE_KEY
 export const supabase = createClient(supabaseUrl, supabaseKey)
 
-const pages = {
+export const pages = {
   index: "index",
   profile: "profile"
 }

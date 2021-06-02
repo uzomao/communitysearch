@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react'
 import searchStyles from './searches.module.scss'
-import { supabase } from '../../App'
+import { supabase, pages } from '../../App'
 import { getTime } from '../../lib/helpers'
 import { Link } from 'react-router-dom'
 import Context from '../../context'
 
-const Searches = ({ page, filter, showPastSearches }) => {
+const Searches = ({ page, filter, showPastSearches, personId }) => {
     
     const [ searches, setSearches ] = useState([])
 
-    const { tabs, getPageTabs } = useContext(Context).value
+    const { tabs, getPageTabs, currentUser } = useContext(Context).value
     const isTabOneActive = getPageTabs(page, tabs).isTabOneActive
     
     //returns a memoized callback to ensure that the effect is only called when 
@@ -24,9 +24,21 @@ const Searches = ({ page, filter, showPastSearches }) => {
             setSearches(searches)
     }, [isTabOneActive])
 
+    const profileGetSearches = useCallback(async () => {
+        const profileId = personId ? personId : currentUser.id
+        let { data: searches, error } = await supabase
+            .from("searches")
+            .select("*, person!personId(*)")
+            .eq("personId", profileId)
+            .order("id", { ascending: false });
+            if (error) console.log("error", error);
+            setSearches(searches)
+    }, [currentUser.id, personId])
+
     useEffect(() => {
-        getSearches().catch(console.error);
-    }, [getSearches]);
+        page === pages.profile ? profileGetSearches().catch(console.error) : getSearches().catch(console.error);
+        console.log('mounted')
+    }, [getSearches, profileGetSearches, page]);
 
     const filterSearches = () => {
         if(!showPastSearches && filter) {
