@@ -1,0 +1,23 @@
+@import '../../styles/config.scss';
+
+.header {
+    margin: $header-margin;
+
+    display: flex;
+    justify-content: space-between;
+
+    div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        p.bio {
+            margin-left: $margin-spacing;
+        }
+    }
+
+    div.buttons {
+        width: 30%;
+        justify-content: space-around;
+    }
+}

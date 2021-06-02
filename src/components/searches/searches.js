@@ -36,7 +36,6 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
 
     useEffect(() => {
         page === pages.profile ? profileGetSearches().catch(console.error) : getSearches().catch(console.error);
-        console.log('mounted')
     }, [getSearches, profileGetSearches, page]);
 
     const filterSearches = () => {
