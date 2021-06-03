@@ -1,6 +1,7 @@
 import React from 'react'
 import headerStyles from './header.module.scss'
 import { Link } from 'react-router-dom'
+import logo from '../../images/logo.png'
 
 const Header = () => {
     return (
@@ -13,7 +14,11 @@ const Header = () => {
                 <Link to='/post' className={headerStyles.button}>
                     find something
                 </Link>
-                <div className={headerStyles.logo}></div>
+                <img 
+                    className={headerStyles.logo} 
+                    src={logo} 
+                    alt="community search logo, a large circle surrounded by five smaller circles" 
+                />
             </div>
         </header>
     )
