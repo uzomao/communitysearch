@@ -34,6 +34,12 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
             setSearches(searches)
     }, [profileId])
 
+    /***
+    const profileGetSuggestions => get Searches that contain suggestions by the person with profile ID
+    then in useEffect, if pages.profile either getSearches or getSuggestions depending on a passed prop
+    bonus: in render function, show the suggestion of the person underneath normal search display
+    */
+
     useEffect(() => {
         page === pages.profile ? profileGetSearches().catch(console.error) : getSearches().catch(console.error);
     }, [getSearches, profileGetSearches, page]);
