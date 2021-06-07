@@ -1,0 +1,68 @@
+@import '../../styles/config';
+
+.menu {
+    position: fixed;
+    top: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(244, 244, 244, 0.85); //#f4f4f4 or $white
+        border-radius: 100%;
+        font-family: $text-font;
+        font-size: $text-heading-size;
+    }
+
+    .link:hover {
+        background: rgba(30, 39, 46, 0.9); //#1e272e or $dark-blue
+        color: $white;
+    }
+
+    .close {
+        position: absolute;
+        top: 50px;
+        right: 25px;
+        font-size: 48px;
+        color: $white !important;
+        font-weight: bolder;
+    }
+
+    .center {
+        width: 200px; height: 200px;
+    }
+
+    .surrounding {
+        width: 150px; height: 150px;
+        position: absolute;
+    }
+
+    #about {
+        transform: translate(200%, 0)
+    }
+
+    #profile {
+        transform: translate(125%, -150%)
+    }
+
+    #community {
+        transform: translate(100%, 150%)
+    }
+
+    #settings {
+        transform: translate(-125%, 125%)
+    }
+
+    #invite {
+        transform: translate(-200%, -50%)
+    }
+
+    #search {
+        transform: translate(-50%, -150%)
+    }
+}
