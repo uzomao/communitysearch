@@ -1,0 +1,48 @@
+@import '../../styles/config.scss';
+
+.header {
+    border-bottom: $grey-border;
+    padding-left: $margin-spacing;
+}
+
+.member {
+    width: 150px;
+    height: 150px;
+    background: $grey;
+    border-radius: 100%;
+}
+
+.profiles {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+
+    .circle {
+        border-radius: 100%;
+        font-family: $text-font;
+        font-size: $text-heading-size;
+        display: flex; justify-content: center; align-items: center;
+    }
+
+    .member {
+        width: 125px;
+        height: 125px;
+        background: $grey;
+        color: $white;
+        position: absolute;
+    }
+
+    .center {
+        width: 150px;
+        height: 150px;
+        background: $dark-blue;
+        color: $white;
+    }
+
+    a {
+        text-decoration: none;
+    }
+    
+}

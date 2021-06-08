@@ -7,6 +7,7 @@ import { MdClose } from "react-icons/md";
 const Menu = ({ setShowMenu }) => {
 
     const { currentUser } = useContext(Context).value
+    const currentUserName = currentUser.name
 
     return (
        <main className={menuStyles.menu}>
@@ -22,11 +23,11 @@ const Menu = ({ setShowMenu }) => {
                about
            </Link>
 
-           <Link to={`/profile/${currentUser.id}`} id={menuStyles.profile} className={`default-link ${menuStyles.link} ${menuStyles.surrounding}`}>
+           <Link to={`/profile/${currentUserName}`} id={menuStyles.profile} className={`default-link ${menuStyles.link} ${menuStyles.surrounding}`}>
                profile
            </Link>
 
-           <Link to='/community' id={menuStyles.community} className={`default-link ${menuStyles.link} ${menuStyles.surrounding}`}>
+           <Link to={`/profile/${currentUserName}/community`} id={menuStyles.community} className={`default-link ${menuStyles.link} ${menuStyles.surrounding}`}>
                community
            </Link>
 
@@ -38,7 +39,7 @@ const Menu = ({ setShowMenu }) => {
                invite
            </Link>
 
-           <Link to='/search' id={menuStyles.search} className={`default-link ${menuStyles.link} ${menuStyles.surrounding}`}>
+           <Link to='/post' id={menuStyles.search} className={`default-link ${menuStyles.link} ${menuStyles.surrounding}`}>
                search
            </Link>
        </main>

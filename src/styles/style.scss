@@ -97,4 +97,8 @@ input, textarea {
     font-size: $text-heading-size;
 }
 
+.page-header {
+    margin: $header-margin;
+}
+
 @import 'buttons';

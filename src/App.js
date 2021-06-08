@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -10,6 +9,7 @@ import Index from './pages/index/index'
 import Search from './pages/search/search'
 import Post from './pages/post/post'
 import Profile from './pages/profile/profile'
+import Community from './pages/community/community'
 import Context from './context'
 import { useState, useMemo } from 'react'
 import { createClient } from '@supabase/supabase-js'
@@ -58,8 +58,11 @@ function App() {
           <Route path='/post'>
             <Post />
           </Route>
-          <Route path='/profile/:id'>
+          <Route exact path='/profile/:name'>
             <Profile page={pages.profile} />
+          </Route>
+          <Route path='/profile/:name/community'>
+            <Community />
           </Route>
         </Context.Provider>
       </Switch>
