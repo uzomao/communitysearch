@@ -63,19 +63,19 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
             {
                 filterSearches().map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
                         
-                        const searchTitle = `${name} is looking for a ${category.toLowerCase()}: ${title}`
+                        const searchTitle = ` is looking for a ${category.toLowerCase()}: ${title}`
 
                         return <div className={searchStyles.search} key={index}>
                             <Link 
                                 to={{
                                     pathname: `/search/${id}`,
                                     state: {
-                                        search: { id: id, title: searchTitle, description: description, createdAt: createdAt}
+                                        search: { id: id, name: name, title: searchTitle, description: description, createdAt: createdAt}
                                     }
                                 }}
                                 className='default-link'
                             >
-                                <h3>{searchTitle}</h3>
+                                <h3><Link to={`/profile/${name}`} className="default-link">{name}</Link>{searchTitle}</h3>
                                 <p>{description}</p>
                                 <div className={searchStyles.footer}>
                                     { isFound && <p className={searchStyles.found}>found :)</p>}

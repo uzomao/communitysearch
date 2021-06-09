@@ -4,7 +4,7 @@ import { getTime } from '../../lib/helpers'
 import searchStyle from './search.module.scss'
 import Suggestions from '../../components/suggestions/suggestions'
 import Buttons from '../../lib/buttons'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../../App'
 
 const Search = ({ location }) => {
@@ -38,7 +38,7 @@ const Search = ({ location }) => {
             {
                 search &&
                     <div className={searchStyle.main}>
-                        <h2>{search.title}</h2>
+                        <h2><Link to={`/profile/${search.name}`} className="default-link">{search.name}</Link>{search.title}</h2>
                         { successMsg && <p className="mt mb success-msg">{successMsg}</p>}
                         <p>{search.description}</p>
                         <div className={searchStyle.footer}>

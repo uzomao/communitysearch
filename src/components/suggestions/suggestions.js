@@ -39,7 +39,7 @@ const Suggestions = ({ searchId }) => {
     }, [searchId, filter])
 
     const addSuggestion = async () => {
-        const suggestionBox = document.getElementById('suggestion-box')
+        const suggestionBox = document.getElementById('suggest')
         const suggestionBody = suggestionBox.value //use ref
 
         let { data: suggestion, error } = await supabase
