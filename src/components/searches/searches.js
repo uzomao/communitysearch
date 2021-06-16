@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react'
 import searchStyles from './searches.module.scss'
 import { supabase, pages } from '../../App'
-import { getTime } from '../../lib/helpers'
+import { getTime, formatCategory } from '../../lib/helpers'
 import { Link } from 'react-router-dom'
 import Context from '../../context'
 
@@ -63,7 +63,7 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
             {
                 filterSearches().map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
                         
-                        const searchTitle = ` is looking for a ${category.toLowerCase()}: ${title}`
+                        const searchTitle = ` is looking for ${formatCategory(category.toLowerCase())}: ${title}`
 
                         return <div className={searchStyles.search} key={index}>
                             <Link 
