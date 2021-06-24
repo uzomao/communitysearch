@@ -20,3 +20,20 @@ export const getTime = (dateTime) => {
 export const pluralize = (num, singular, plural) => {
     return num > 1 ? `${num} ${plural}` : `${num} ${singular}`
 }
+
+const mapping = {
+    "book": "a book",
+    "music": "music",
+    "film": "a film",
+    "tv show": "a tv show",
+    "podcast": "a podcast",
+    "video": "a video",
+    "art": "art",
+    "article": "an article",
+    "web thing": "a web thing",
+    "other": "an uncategorized thing"
+}
+
+export const formatCategory = (category) => {
+    return mapping[category]
+}
