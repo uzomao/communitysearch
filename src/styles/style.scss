@@ -102,4 +102,17 @@ input, textarea {
     margin: $header-margin;
 }
 
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: $align-content;
+    text-align: center;
+}
+
+.form > * {
+    margin: 1.5rem 0;
+    width: 50%
+}
+
 @import 'buttons';

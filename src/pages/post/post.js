@@ -41,7 +41,7 @@ const Post = () => {
                 let newSearch = search[0]
                 history.push(`/search/${newSearch.id}`, { search: newSearch, successMsg: 'Search created successfully' })
             }
-        }
+    }
 
     return (
         <div>
@@ -54,15 +54,15 @@ const Post = () => {
                     errorText && <p className="error">{errorText}</p>
                 }
                 
-                <div className={postStyle.form}>
+                <div className="form">
                     <select name="category" defaultValue={""} id="search-category" ref={categoryRef} className={`mt mb dropdown ${postStyle.dropdown}`}>
                         <option value="" disabled style={{color: '#9c9c9c'}}>category</option>
                         {
                             categories.map((category, index) => <option key={index} value={category}>{category}</option>)
                         }
                     </select>
-                    <input type="text" placeholder="what would you like to find?" ref={titleRef} className={`mb ${postStyle.element}`} />
-                    <textarea placeholder="want to say more about this?" ref={descriptionRef} className={`mb ${postStyle.element}`}></textarea>
+                    <input type="text" placeholder="what would you like to find?" ref={titleRef} className={`${postStyle.element}`} />
+                    <textarea placeholder="want to say more about this?" ref={descriptionRef} className={`${postStyle.element}`}></textarea>
                     <div className={`mb ${postStyle.radiobtns}`}>
                         <h3>ask:</h3>
 

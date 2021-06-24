@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import logo from '../../images/logo.png'
 import Menu from '../../components/menu/menu'
 
-const Header = () => {
+const Header = ({ showOnlyTitle }) => {
 
     const [ showMenu, setShowMenu ] = useState(false)
 
@@ -15,6 +15,7 @@ const Header = () => {
                 <Link to='/' className="default-link">community.search</Link>
             </h2>
 
+        { !showOnlyTitle &&
             <div className={headerStyles.right}>
                 <Link to='/post' className={headerStyles.button}>
                     find something
@@ -26,7 +27,9 @@ const Header = () => {
                     onClick={() => setShowMenu(true)}
                 />
             </div>
+        }
         </header>
+        
         {
             showMenu &&
                 <Menu setShowMenu={setShowMenu} />

@@ -10,6 +10,8 @@ import Search from './pages/search/search'
 import Post from './pages/post/post'
 import Profile from './pages/profile/profile'
 import Community from './pages/community/community'
+import SignUp from './pages/auth/signUp/signUp'
+import Welcome from './pages/welcome/welcome'
 import Context from './context'
 import { useState, useMemo } from 'react'
 import { createClient } from '@supabase/supabase-js'
@@ -63,6 +65,12 @@ function App() {
           </Route>
           <Route path='/profile/:name/community'>
             <Community />
+          </Route>
+          <Route path='/auth/sign-up'>
+            <SignUp />
+          </Route>
+          <Route path='/welcome'>
+            <Welcome />
           </Route>
         </Context.Provider>
       </Switch>
