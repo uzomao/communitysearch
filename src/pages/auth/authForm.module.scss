@@ -1,5 +1,19 @@
 @import '../../styles/_config.scss';
 
+.success {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: $input-border;
+    margin: 8rem 16rem;
+    padding: $content-padding;
+    height: 10rem;
+
+    p.small {
+        font-size: $text-subtext-size;
+    }
+}
 .footnote {
     font-size: $text-subtext-size;
     margin-top: 0
