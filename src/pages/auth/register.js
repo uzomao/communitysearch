@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react'
-import Buttons from '../../../lib/buttons'
+import Buttons from '../../lib/buttons'
 import { Link } from 'react-router-dom'
-import authForm from '../authForm.module.scss'
-import Header from '../../../components/header/header'
-import { supabase } from '../../../App'
+import authForm from './authForm.module.scss'
+import Header from '../../components/header/header'
+import { supabase } from '../../App'
 
-const SignUp = () => {
+const Register = () => {
 
     const emailRef = useRef(null)
     const nameRef = useRef(null)
@@ -16,7 +16,7 @@ const SignUp = () => {
     const [ errorText, setErrorText ] = useState(null)
 
     const signUp = async () => {
-        const { user, error } = await supabase.auth.signUp({
+        const { error } = await supabase.auth.signUp({
             email: emailRef.current.value,
             password: passwordRef.current.value,
         }, {
@@ -59,11 +59,11 @@ const SignUp = () => {
 
                 <Buttons btnText="Sign Up" isDoubleBtn={true} onClick={() => signUp()}/>
 
-                <p className={authForm.footnote}>You can <Link to='/auth/sign-in'>log in</Link> here if you're not new to the app</p>
+                <p className={authForm.footnote}>You can <Link to='/login'>log in</Link> here if you're not new to the app</p>
             </div>
         }
         </>
     )
 }
 
-export default SignUp
+export default Register

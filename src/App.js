@@ -10,7 +10,8 @@ import Search from './pages/search/search'
 import Post from './pages/post/post'
 import Profile from './pages/profile/profile'
 import Community from './pages/community/community'
-import SignUp from './pages/auth/signUp/signUp'
+import Register from './pages/auth/register'
+import Login from './pages/auth/login'
 import Welcome from './pages/welcome/welcome'
 import Context from './context'
 import { useState, useMemo } from 'react'
@@ -56,22 +57,35 @@ function App() {
           <Route exact path='/'>
             <Index page={pages.index} />
           </Route>
+
           <Route path='/search/:id' component={Search} />
+
           <Route path='/post'>
             <Post />
           </Route>
+
           <Route exact path='/profile/:name'>
             <Profile page={pages.profile} />
           </Route>
+
           <Route path='/profile/:name/community'>
             <Community />
           </Route>
-          <Route path='/auth/sign-up'>
-            <SignUp />
+
+          {/* Auth Routes */}
+          
+          <Route path='/register'>
+            <Register />
           </Route>
+
+          <Route path='/login'>
+            <Login />
+          </Route>
+
           <Route path='/welcome'>
             <Welcome />
           </Route>
+
         </Context.Provider>
       </Switch>
     </Router>
