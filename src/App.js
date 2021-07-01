@@ -58,10 +58,10 @@ function App() {
       .eq('userId', currentUser.id)
       if(error) console.log(error)
       else {
-        setPerson(person)
+        setPerson(person[0])
         setValue({
           ...defaultContextValue,
-          currentUser: person
+          currentUser: person[0]
         })
       }
   }, [defaultContextValue])
@@ -95,7 +95,7 @@ function App() {
                 }
 
                 if(error) console.log(error)
-                else setPerson(person)
+                else setPerson(person[0])
             }
         }
     );
