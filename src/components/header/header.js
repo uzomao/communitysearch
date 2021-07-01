@@ -3,6 +3,7 @@ import headerStyles from './header.module.scss'
 import { Link } from 'react-router-dom'
 import logo from '../../images/logo.png'
 import Menu from '../../components/menu/menu'
+import SignOut from '../../components/auth/signOut'
 
 const Header = ({ showOnlyTitle }) => {
 
@@ -26,6 +27,7 @@ const Header = ({ showOnlyTitle }) => {
                     alt="community search logo, a large circle surrounded by five smaller circles"
                     onClick={() => setShowMenu(true)}
                 />
+                <SignOut />
             </div>
         }
         </header>

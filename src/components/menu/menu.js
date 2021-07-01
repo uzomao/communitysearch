@@ -7,7 +7,6 @@ import { MdClose } from "react-icons/md";
 const Menu = ({ setShowMenu }) => {
 
     const { currentUser } = useContext(Context).value
-    console.log(currentUser)
     const currentUserName = currentUser ? currentUser[0].name : ''
 
     return (

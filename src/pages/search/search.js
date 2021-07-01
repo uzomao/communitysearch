@@ -4,10 +4,10 @@ import { getTime } from '../../lib/helpers'
 import searchStyle from './search.module.scss'
 import Suggestions from '../../components/suggestions/suggestions'
 import Buttons from '../../lib/buttons'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, useLocation, Link } from 'react-router-dom'
 import { supabase } from '../../App'
 
-const Search = ({ location }) => {
+const Search = () => {
 
     const searchId = useParams().id
 
@@ -21,6 +21,8 @@ const Search = ({ location }) => {
     }, [searchId])
 
     const [ search, setSearch ] = useState(null)
+
+    const location = useLocation()
     const [ successMsg, setSuccessMsg ] = useState(location.state ? location.state.successMsg : null)
 
     useEffect(() => {

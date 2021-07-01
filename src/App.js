@@ -4,6 +4,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { PrivateRoute, AuthRoute } from './components/auth/routes';
 import Index from './pages/index/index'
 import Search from './pages/search/search'
 import Post from './pages/post/post'
@@ -108,33 +109,35 @@ function App() {
     <Router>
       <Switch>
         <Context.Provider value={providerValue}>
-          <Route exact path='/'>
+          <PrivateRoute exact path='/'>
             <Index page={pages.index} />
-          </Route>
+          </PrivateRoute>
 
-          <Route path='/search/:id' component={Search} />
+          <PrivateRoute path='/search/:id'>
+            <Search />
+          </PrivateRoute>
 
-          <Route path='/post'>
+          <PrivateRoute path='/post'>
             <Post />
-          </Route>
+          </PrivateRoute>
 
-          <Route exact path='/profile/:name'>
+          <PrivateRoute exact path='/profile/:name'>
             <Profile page={pages.profile} />
-          </Route>
+          </PrivateRoute>
 
-          <Route path='/profile/:name/community'>
+          <PrivateRoute path='/profile/:name/community'>
             <Community />
-          </Route>
+          </PrivateRoute>
 
           {/* Auth Routes */}
 
-          <Route path='/register'>
+          <AuthRoute path='/register'>
             <Register />
-          </Route>
+          </AuthRoute>
 
-          <Route path='/login'>
+          <AuthRoute path='/login'>
             <Login />
-          </Route>
+          </AuthRoute>
 
           <Route path='/welcome'>
             <Welcome />
