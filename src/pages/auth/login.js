@@ -11,25 +11,20 @@ const Login = () => {
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
 
-    const [ successText, setSuccessText ] = useState(null)
     const [ errorText, setErrorText ] = useState(null)
 
     const history = useHistory()
 
     const signIn = async () => {
 
-        const { user, session, error } = await supabase.auth.signIn({
+        const { error } = await supabase.auth.signIn({
             email: emailRef.current.value,
             password: passwordRef.current.value
-        }, {
-            redirectTo: 'http://localhost:3000'
         })
 
         if(error){
             setErrorText(error.message)
         } else {
-            setErrorText('')
-            setSuccessText('Logging you in...')
             history.push('/')
         }
     }
@@ -52,7 +47,6 @@ const Login = () => {
                 <input type="password" placeholder="Enter a password" ref={passwordRef} />
 
                 {errorText && <p className="error">{errorText}</p>}
-                {successText && <p className="success-msg">{successText}</p>}
 
                 <Buttons btnText="Log In" isDoubleBtn={true} onClick={() => signIn()}/>
 

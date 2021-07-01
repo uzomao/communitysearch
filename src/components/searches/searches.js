@@ -75,7 +75,7 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
                                 }}
                                 className='default-link'
                             >
-                                <h3><Link to={`/profile/${name}`} className="default-link">{name}</Link>{searchTitle}</h3>
+                                <h3>{name} {searchTitle}</h3>
                                 <p>{description}</p>
                                 <div className={searchStyles.footer}>
                                     { isFound && <p className={searchStyles.found}>found :)</p>}

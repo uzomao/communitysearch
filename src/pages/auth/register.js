@@ -16,7 +16,7 @@ const Register = () => {
     const [ errorText, setErrorText ] = useState(null)
 
     const signUp = async () => {
-        const { error } = await supabase.auth.signUp({
+        const { user, error } = await supabase.auth.signUp({
             email: emailRef.current.value,
             password: passwordRef.current.value,
         }, {
@@ -26,6 +26,15 @@ const Register = () => {
         if(error){
             setErrorText(error.message)
         } else {
+            await supabase
+                .from('person')
+                .insert([
+                    { 
+                        name: nameRef.current.value, 
+                        userId: user.id
+                    },
+            ])
+
             setIsSuccess(true)
         }
     }
