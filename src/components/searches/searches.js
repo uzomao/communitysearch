@@ -9,7 +9,7 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
     
     const [ searches, setSearches ] = useState([])
 
-    const { tabs, getPageTabs } = useContext(Context).value
+    const { tabs, getPageTabs, currentUser } = useContext(Context).value
     const isTabOneActive = getPageTabs(page, tabs).isTabOneActive
     
     //returns a memoized callback to ensure that the effect is only called when 
@@ -18,11 +18,10 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
         let { data: searches, error } = await supabase
             .from("searches")
             .select("*, person!personId(*)")
-            .eq('isInCommunity', isTabOneActive)
             .order("id", { ascending: false });
             if (error) console.log("error", error);
             setSearches(searches)
-    }, [isTabOneActive])
+    }, [])
 
     const profileGetSearches = useCallback(async () => {
         let { data: searches, error } = await supabase
@@ -44,7 +43,7 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
         page === pages.profile ? profileGetSearches().catch(console.error) : getSearches().catch(console.error);
     }, [getSearches, profileGetSearches, page]);
 
-    const filterSearches = () => {
+    const filterByTimeAndCategory = () => {
         if(!showPastSearches && filter) {
 
             return searches.filter(({ isFound }) => isFound === false).filter(({ category }) => category === filter)
@@ -58,10 +57,26 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
         }
     }
 
+    const filteredSearches = filterByTimeAndCategory()
+
+    const filterByCommunity = () => {
+        if(currentUser){
+            if(isTabOneActive){
+                return filteredSearches.filter(({ personId }) => currentUser.community.includes(personId))
+            } else {
+                return filteredSearches.filter(({ personId }) => !currentUser.community.includes(personId))
+            }
+        } else {
+            return filteredSearches
+        }
+    }
+
+    const finalFilteredSearches = filterByCommunity()
+
     return (
         <div>
             {
-                filterSearches().map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
+                finalFilteredSearches.map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
                         
                         const searchTitle = ` is looking for ${formatCategory(category.toLowerCase())}: ${title}`
 
