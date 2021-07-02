@@ -37,14 +37,16 @@ const Profile = ({ page }) => {
         const { data: person, error } = await supabase
             .from('person')
             .select('*')
-            .eq('id', currentUser.id)
-            const community = person[0].community || []
+            .eq('name', name)
 
-            if(!community.includes(name)){
+            const { id: profileId } = person[0]
+            const community = currentUser.community
+
+            if(!community.includes(profileId)){
                 const { error } = await supabase
                     .from('person')
                     .update([
-                        { community: [...community, name] },
+                        { community: [...community, profileId] },
                     ])
                     .eq('id', currentUser.id)
                     if (error) console.log("error", error);
