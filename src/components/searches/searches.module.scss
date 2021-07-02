@@ -3,7 +3,6 @@
 .search {
     text-align: center;
     border-bottom: $grey-border;
-    padding: $content-padding;
 
     h3 {
         color: $text-color
@@ -11,6 +10,14 @@
 
     &:first-child {
         border-top: $grey-border;
+    }
+}
+
+.content {
+    padding: $content-padding;
+
+    p {
+        text-align: center;
     }
 }
 

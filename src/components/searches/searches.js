@@ -43,7 +43,7 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
         page === pages.profile ? profileGetSearches().catch(console.error) : getSearches().catch(console.error);
     }, [getSearches, profileGetSearches, page]);
 
-    const filterByTimeAndCategory = () => {
+    const filterByTimeAndCategory = (searches) => {
         if(!showPastSearches && filter) {
 
             return searches.filter(({ isFound }) => isFound === false).filter(({ category }) => category === filter)
@@ -57,30 +57,44 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
         }
     }
 
-    const filteredSearches = filterByTimeAndCategory()
+    const filterByCommunity = (searches) => {
 
-    const filterByCommunity = () => {
         if(currentUser){
             if(isTabOneActive){
-                return filteredSearches.filter(({ personId }) => currentUser.community.includes(personId))
+                return searches.filter(({ personId }) => currentUser.community.includes(personId))
             } else {
-                return filteredSearches.filter(({ personId }) => !currentUser.community.includes(personId))
+                return searches.filter(({ personId }) => !currentUser.community.includes(personId))
             }
         } else {
-            return filteredSearches
+            return searches
         }
     }
 
-    const finalFilteredSearches = filterByCommunity()
+    const filterSearches = (searches) => {
+        return filterByCommunity(filterByTimeAndCategory(searches))
+    }
+
+    const filteredSearches = filterSearches(searches)
 
     return (
         <div>
             {
-                finalFilteredSearches.map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
+                filteredSearches.length === 0 && isTabOneActive &&
+                    <div className={`mt ${searchStyles.content}`}>
+                        <p>
+                            Searches from people in your community show up here. It's empty now because you haven't added anyone yet.
+                        </p>
+                        <p>
+                            <Link to='/invite'> Invite</Link> someone to get this tab popping.
+                        </p>
+                    </div>
+            }
+            {
+                filteredSearches.map(({ id, title, description, createdAt, category, isFound, person: { name } }, index) => {
                         
                         const searchTitle = ` is looking for ${formatCategory(category.toLowerCase())}: ${title}`
 
-                        return <div className={searchStyles.search} key={index}>
+                        return <div className={`${searchStyles.search} ${searchStyles.content}`} key={index}>
                             <Link 
                                 to={{
                                     pathname: `/search/${id}`,
