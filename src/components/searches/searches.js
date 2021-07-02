@@ -23,25 +23,9 @@ const Searches = ({ page, filter, showPastSearches, profile }) => {
             setSearches(searches)
     }, [])
 
-    const profileGetSearches = useCallback(async () => {
-        let { data: searches, error } = await supabase
-            .from("searches")
-            .select("*, person!personId(*)")
-            .eq("personId", profile.id)
-            .order("id", { ascending: false });
-            if (error) console.log("error", error);
-            setSearches(searches)
-    }, [profile])
-
-    /***
-    const profileGetSuggestions => get Searches that contain suggestions by the person with profile ID
-    then in useEffect, if pages.profile either getSearches or getSuggestions depending on a passed prop
-    bonus: in render function, show the suggestion of the person underneath normal search display
-    */
-
     useEffect(() => {
-        page === pages.profile ? profileGetSearches().catch(console.error) : getSearches().catch(console.error);
-    }, [getSearches, profileGetSearches, page]);
+        getSearches().catch(console.error);
+    }, [getSearches]);
 
     const filterByTimeAndCategory = (searches) => {
         if(!showPastSearches && filter) {
@@ -70,8 +54,16 @@ const Searches = ({ page, filter, showPastSearches, profile }) => {
         }
     }
 
+    const filterByProfile = (searches) => {
+        return searches.filter(({ personId}) => personId === profile.id)
+    }
+
     const filterSearches = (searches) => {
-        return filterByCommunity(filterByTimeAndCategory(searches))
+        const initialFilter = filterByTimeAndCategory(searches)
+        
+        if (page === pages.index) return filterByCommunity(initialFilter)
+        else if (page === pages.profile) return filterByProfile(initialFilter)
+        else return initialFilter
     }
 
     const filteredSearches = filterSearches(searches)
@@ -87,7 +79,7 @@ const Searches = ({ page, filter, showPastSearches, profile }) => {
     return (
         <div>
             {
-                filteredSearches.length === 0 && isTabOneActive && page === 'index' &&
+                filteredSearches.length === 0 && isTabOneActive && page === pages.index &&
                     <div className={`mt ${searchStyles.content}`}>
                         <p>
                             Searches from people in your community show up here. It's empty now because you haven't added anyone yet.
@@ -98,7 +90,7 @@ const Searches = ({ page, filter, showPastSearches, profile }) => {
                     </div>
             }
             {
-                filteredSearches.length === 0 && isTabOneActive && page === 'profile' &&
+                filteredSearches.length === 0 && isTabOneActive && page === pages.profile &&
                     <div className={`mt ${searchStyles.content}`}>
                         <p>{formatProfilePageMsg(profile.name)}</p>
                     </div>

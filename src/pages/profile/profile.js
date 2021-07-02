@@ -21,7 +21,8 @@ const Profile = ({ page }) => {
     const [ successMsg, setSuccessMsg ] = useState(null)
     const [ errorMsg, setErrorMsg ] = useState(null)
 
-    const { currentUser } = useContext(Context).value
+    const { tabs, getPageTabs, currentUser } = useContext(Context).value
+    const isTabOneActive = getPageTabs(page, tabs).isTabOneActive
 
     const getProfile = useCallback(async() => {
         let { data: person, error } = await supabase
@@ -97,7 +98,12 @@ const Profile = ({ page }) => {
                 <div>
                     <Filter filter={filter} setFilter={setFilter} setShowPastSearches={setShowPastSearches} />
                 </div>
-                <Searches page={page} filter={filter} showPastSearches={showPastSearches} profile={profile} />
+                {
+                    isTabOneActive ?
+                        <Searches page={page} filter={filter} showPastSearches={showPastSearches} profile={profile} />
+                        :
+                        <h1>Enjoyment!</h1>
+                }
             </div>
     )
 }

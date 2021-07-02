@@ -37,7 +37,7 @@ function App() {
         isTabOneActive: true 
       },
       { page: pages.profile, 
-        tabNames: ['Searches', 'Suggestions'], 
+        tabNames: ['Searches', 'Enjoying'], 
         isTabOneActive: true
       }
     ],
