@@ -97,7 +97,7 @@ const Profile = ({ page }) => {
                 <div>
                     <Filter filter={filter} setFilter={setFilter} setShowPastSearches={setShowPastSearches} />
                 </div>
-                <Searches page={page} filter={filter} showPastSearches={showPastSearches} profileId={profile.id} />
+                <Searches page={page} filter={filter} showPastSearches={showPastSearches} profile={profile} />
             </div>
     )
 }

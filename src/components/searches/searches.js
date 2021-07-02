@@ -5,7 +5,7 @@ import { getTime, formatCategory } from '../../lib/helpers'
 import { Link } from 'react-router-dom'
 import Context from '../../context'
 
-const Searches = ({ page, filter, showPastSearches, profileId }) => {
+const Searches = ({ page, filter, showPastSearches, profile }) => {
     
     const [ searches, setSearches ] = useState([])
 
@@ -27,11 +27,11 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
         let { data: searches, error } = await supabase
             .from("searches")
             .select("*, person!personId(*)")
-            .eq("personId", profileId)
+            .eq("personId", profile.id)
             .order("id", { ascending: false });
             if (error) console.log("error", error);
             setSearches(searches)
-    }, [profileId])
+    }, [profile])
 
     /***
     const profileGetSuggestions => get Searches that contain suggestions by the person with profile ID
@@ -76,10 +76,18 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
 
     const filteredSearches = filterSearches(searches)
 
+    const formatProfilePageMsg = (profileName) => {
+
+        return currentUser && profileName === currentUser.name ? 
+            `You have not made any searches yet` 
+            : 
+            `${profileName} has not made any searches yet`
+    }
+
     return (
         <div>
             {
-                filteredSearches.length === 0 && isTabOneActive &&
+                filteredSearches.length === 0 && isTabOneActive && page === 'index' &&
                     <div className={`mt ${searchStyles.content}`}>
                         <p>
                             Searches from people in your community show up here. It's empty now because you haven't added anyone yet.
@@ -87,6 +95,12 @@ const Searches = ({ page, filter, showPastSearches, profileId }) => {
                         <p>
                             <Link to='/invite'> Invite</Link> someone to get this tab popping.
                         </p>
+                    </div>
+            }
+            {
+                filteredSearches.length === 0 && isTabOneActive && page === 'profile' &&
+                    <div className={`mt ${searchStyles.content}`}>
+                        <p>{formatProfilePageMsg(profile.name)}</p>
                     </div>
             }
             {
