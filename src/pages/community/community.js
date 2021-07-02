@@ -6,37 +6,31 @@ import communityStyles from './community.module.scss'
 
 const Community = () => {
 
-    /**
-     * the code below was copied and pasted from profile.js.
-     * it needs to be DRYed
-     */
     const profileName = useParams().name
 
     const [ profile, setProfile ] = useState(null)
+    const [ communityMemberNames, setCommunityMemberNames ] = useState([])
 
-    const getProfile = useCallback(async() => {
-        let { data: person, error } = await supabase
+    const initialize = useCallback(async() => {
+        let { data: people, error } = await supabase
             .from('person')
             .select('*')
-            .eq('name', profileName)
             if (error) console.log("error", error);
-            setProfile(person[0])
-    }, [profileName])
+            else {
+                const currentUser = people.filter(({ name }) => name === profileName)[0]
+                setProfile(currentUser)
+
+                let names = []
+                const communityMembers = people.filter(({ id }) => currentUser.community.includes(id))
+                for (const member of communityMembers) {names.push(member.name)}
+                setCommunityMemberNames(names)
+            }
+    }, [setProfile, setCommunityMemberNames, profileName])
+
 
     useEffect(() => {
-        getProfile().catch(console.error);
-    }, [getProfile]);
-
-    // const positionNode = (index) => {
-    //     let angle = 360/maxNumOfLessons
-    //     if(index === 0){
-    //         return `translate(${radius})`
-    //     } else if(index === maxNumOfLessons/2){
-    //         return `translate(-${radius})`
-    //     } else {
-    //         return `rotate(${index * angle}deg) translate(${radius}) rotate(-${index * angle}deg)`
-    //     }
-    // }
+        initialize().catch(console.error);
+    }, [initialize]);
 
     let memberCount = 0;
     
@@ -69,13 +63,13 @@ const Community = () => {
 
             <div className={communityStyles.profiles}>
                 {
-                    profile && profile.community && profile.community.map((member, index) => 
+                    communityMemberNames.map((name, index) =>
                         <Link key={index} 
-                            to={`/profile/${member}`} 
+                            to={`/profile/${name}`} 
                             className={`default-link ${communityStyles.circle} ${communityStyles.member}`}
                             style={{transform: positionMember(index)}}
                         >
-                            {member}
+                            {name}
                         </Link>
                     )
                 }
