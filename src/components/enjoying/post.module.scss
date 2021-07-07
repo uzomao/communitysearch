@@ -1,0 +1,11 @@
+.form {
+    flex-direction: column;
+    
+    div {
+        flex-direction: row;
+    }
+
+    * {
+        padding: .25rem
+    }
+}

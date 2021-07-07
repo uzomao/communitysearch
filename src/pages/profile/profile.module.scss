@@ -20,4 +20,11 @@
         width: 30%;
         justify-content: space-around;
     }
+    
+
+    .enjoying {
+        flex-direction: column;
+        margin: 0 2rem;
+        align-items: flex-start !important;
+    }
 }

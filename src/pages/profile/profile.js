@@ -8,6 +8,7 @@ import profileStyles from './profile.module.scss'
 import { supabase } from '../../App'
 import Buttons from '../../lib/buttons'
 import Context from '../../context'
+import PostEnjoying from '../../components/enjoying/post'
 
 const Profile = ({ page }) => {
 
@@ -83,7 +84,10 @@ const Profile = ({ page }) => {
                     { profile &&
                         <div>
                             <h2>{`${profileName}'s page`}</h2>
-                            <p className={profileStyles.bio}>{profile.bio}</p>
+                            <div className={profileStyles.enjoying}>
+                                <p className="success-msg">currently enjoying</p>
+                                {<PostEnjoying />}
+                            </div>
                         </div>
                     }
                     <div className={profileStyles.buttons}>
