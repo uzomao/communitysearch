@@ -72,7 +72,6 @@ const Profile = ({ page }) => {
 
     }, [getProfile, successMsg, errorMsg]);
 
-    console.log(profile)
 
     return (
         profile &&

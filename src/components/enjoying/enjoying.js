@@ -1,12 +1,12 @@
 import React, { useRef, useContext, useState, useEffect, useCallback } from 'react'
 import categories from '../../categories.json'
-import postStyles from './post.module.scss'
+import enjoyingStyles from './enjoying.module.scss'
 import { supabase } from '../../App'
 import Context from '../../context'
 import { MdClose } from 'react-icons/md'
 
 
-const Post = ({ profileId }) => {
+const Enjoying = ({ profileId }) => {
 
     const titleRef = useRef(null)
     const urlRef = useRef(null)
@@ -64,7 +64,7 @@ const Post = ({ profileId }) => {
     const showEnjoying = (enjoying) => {
         const { title, url, category } = enjoying
         return url ? <p className="subtext">
-                        <a href={url}>{title}</a>
+                        <a href={url} target="_blank" rel="noopener noreferrer" className={enjoyingStyles.link}>{title}</a>
                         <span> {category && `(${category})`}</span>
                     </p>
                     : <p className="subtext">{title}<span> {category && `(${category})`}</span></p>
@@ -81,7 +81,7 @@ const Post = ({ profileId }) => {
                         </button>
                     </>
                     :
-                    <div className={postStyles.form}>
+                    <div className={enjoyingStyles.form}>
                         <div>
                             <span>
                                 <input type="text" placeholder="title" ref={titleRef}></input>
@@ -101,7 +101,7 @@ const Post = ({ profileId }) => {
                                 }
                             </select>
                         </div>
-                        <div className={postStyles.footer}>
+                        <div className={enjoyingStyles.footer}>
                             <button style={{padding: 0}} className="text-btn-regular" aria-label="submit button" onClick={() => checkSubmission()}>
                                 Submit
                             </button>
@@ -115,4 +115,4 @@ const Post = ({ profileId }) => {
     )
 }
 
-export default Post
+export default Enjoying
