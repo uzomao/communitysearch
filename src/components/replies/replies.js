@@ -64,7 +64,7 @@ const Replies = ({ suggestionId, enableReplyForSuggestionId, closeReplyBox }) =>
             }
             {
                 replies.map(( { body, person: {name} }, index ) => 
-                    <p key={index} className={repliesStyle.reply}><span>{name}: </span>{body}</p>
+                    <p key={index} role="button" aria-label="button" className={repliesStyle.reply}><span>{name}: </span>{body}</p>
                 )
             }
         </div>

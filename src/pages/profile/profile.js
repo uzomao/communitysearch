@@ -8,7 +8,7 @@ import profileStyles from './profile.module.scss'
 import { supabase } from '../../App'
 import Buttons from '../../lib/buttons'
 import Context from '../../context'
-import PostEnjoying from '../../components/enjoying/post'
+import Enjoying from '../../components/enjoying/enjoying'
 
 const Profile = ({ page }) => {
 
@@ -72,6 +72,8 @@ const Profile = ({ page }) => {
 
     }, [getProfile, successMsg, errorMsg]);
 
+    console.log(profile)
+
     return (
         profile &&
             <div>
@@ -85,8 +87,8 @@ const Profile = ({ page }) => {
                         <div>
                             <h2>{`${profileName}'s page`}</h2>
                             <div className={profileStyles.enjoying}>
-                                <p className="success-msg">currently enjoying</p>
-                                {<PostEnjoying />}
+                                <p className={`success-msg ${profileStyles.currently}`}>currently enjoying</p>
+                                {<Enjoying profileId={profile.id} />}
                             </div>
                         </div>
                     }
