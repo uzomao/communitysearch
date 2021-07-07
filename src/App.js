@@ -13,6 +13,8 @@ import Community from './pages/community/community'
 import Register from './pages/auth/register'
 import Login from './pages/auth/login'
 import Welcome from './pages/welcome/welcome'
+import Invite from './pages/invite/invite'
+
 import Context from './context'
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import { createClient } from '@supabase/supabase-js'
@@ -25,6 +27,9 @@ export const pages = {
   index: "index",
   profile: "profile"
 }
+
+export const SUCCESS_CODE = 'success'
+export const ERROR_CODE = 'error'
 
 function App() {
 
@@ -127,6 +132,10 @@ function App() {
 
           <PrivateRoute path='/profile/:name/community'>
             <Community />
+          </PrivateRoute>
+
+          <PrivateRoute path='/invite'>
+            <Invite />
           </PrivateRoute>
 
           {/* Auth Routes */}

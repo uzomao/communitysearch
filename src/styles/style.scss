@@ -115,4 +115,19 @@ input, textarea {
     width: 50%
 }
 
+.success-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: $input-border;
+    margin: 8rem 16rem;
+    padding: $content-padding;
+    height: 10rem;
+
+    p.small {
+        font-size: $text-subtext-size;
+    }
+}
+
 @import 'buttons';
