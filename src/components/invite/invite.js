@@ -10,20 +10,24 @@ const Invite = () => {
 
     const inviteRef = useRef(null)
 
-    const [ errorText, setErrorText ] = useState(null)
-    const [ successMessage, setSuccessMessage ] = useState(null)
+    const [responseMessage, setResponseMessage] = useState(null)
 
     const [searchResults, setSearchResults] = useState(null)
     const [invitee, setInvitee] = useState(null)
     const [resultText, setResultText] = useState(null)
     const [buttonText, setButtonText] = useState('Invite')
 
-    const { currentUser } = useContext(Context).value
+    const context = useContext(Context)
+    const { currentUser } = context.value
+
+    const setMessage = ( status, message )  => {
+        setResponseMessage({ status, message })
+    }
 
     const checkSubmission = () => {
 
         if(!invitee){
-            return setErrorText('Please enter a value')
+            return setResponseMessage(ERROR_CODE, 'Please enter a value')
         }
 
         const isEmailAddress = invitee.includes('@')
@@ -32,7 +36,9 @@ const Invite = () => {
 
     }
 
-    const sendInvite = (invitee, isEmailAddress) => {
+    const sendInvite = async (invitee, isEmailAddress) => {
+
+        const currentUserResolved = await currentUser
         
         if(isEmailAddress){
             // check if user is in app
@@ -40,12 +46,14 @@ const Invite = () => {
         } else {
             getPerson(invitee).then(res => {
                 if(res === undefined){
-                    setErrorText("This person doesn't seem to be on community.search")
+                    setResponseMessage(ERROR_CODE, "This person doesn't seem to be on community.search")
                 } else {
-                    addToCommunity(currentUser, invitee).then(res => {
-                        if(res.status === ERROR_CODE) setErrorText(res.message)
-                        else if(res.status === SUCCESS_CODE) setSuccessMessage(res.message)
-
+                    addToCommunity(currentUserResolved, invitee).then(({ data, status, message }) => {
+                        status === SUCCESS_CODE && context.setValue({
+                                                            ...context,
+                                                            currentUser: { ...currentUser, community: data }
+                                                        })
+                        setMessage(status, message)
                         setInvitee(null)
                     })
                 }
@@ -58,7 +66,7 @@ const Invite = () => {
 
         if(!name.includes('@')){
             searchForPersonName(name).then(res => {
-                if(res.length === 0) setResultText(`There doesn't seem to be a community.search account matching ${name}`)
+                if(res.length === 0) { setSearchResults(null); setResultText(`There doesn't seem to be a community.search account matching ${name}`)}
                 else { setSearchResults(res) ; resultText && setResultText(null) }
             })  
         } else {
@@ -68,13 +76,13 @@ const Invite = () => {
 
     return (
         <>
-            { errorText && <p className="error">{errorText}</p> }
-            { successMessage && <p className="success-msg">{successMessage}</p> }
+            { responseMessage && <p className={responseMessage.status}>{responseMessage.message}</p> }
+
             <div className="form">
                 {
                     invitee ?
-                        <div className="success-box">
-                            <p>{invitee}</p>
+                        <div>
+                            <p>Invite {invitee}?</p>
                             <button className="mt text-btn-regular subtext" onClick={() => { 
                                 setInvitee(null);
                                 setButtonText('Invite')
@@ -85,7 +93,6 @@ const Invite = () => {
                 }
                 {
                     searchResults &&
-                        <>
                         <ul className={inviteStyles.dropdown}>
                             {
                                 searchResults.map(({ name, index }) => 
@@ -97,10 +104,12 @@ const Invite = () => {
                                 )
                             }
                         </ul>
-                        {resultText && <p>{resultText}</p>}
-                        </>
                 }
-                <Buttons btnText={buttonText} isDoubleBtn={true} onClick={() => checkSubmission()} />
+                { resultText ?
+                    <p>{resultText}</p>
+                    :
+                    <Buttons btnText={buttonText} isDoubleBtn={true} onClick={() => checkSubmission()} />
+                }
             </div>
         </>
     )
