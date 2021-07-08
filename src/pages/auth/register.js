@@ -16,8 +16,10 @@ const Register = () => {
     const [ errorText, setErrorText ] = useState(null)
 
     const signUp = async () => {
+        const email = emailRef.current.value
+
         const { user, error } = await supabase.auth.signUp({
-            email: emailRef.current.value,
+            email: email,
             password: passwordRef.current.value,
         }, {
             redirectTo: 'http://localhost:3000/welcome'
@@ -30,7 +32,8 @@ const Register = () => {
                 .from('person')
                 .insert([
                     { 
-                        name: nameRef.current.value, 
+                        name: nameRef.current.value,
+                        email: email,
                         userId: user.id
                     },
             ])

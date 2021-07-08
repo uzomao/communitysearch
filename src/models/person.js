@@ -24,7 +24,20 @@ const searchForPersonName = async (searchTerm) => {
         }
 }
 
+const getNameFromEmailAddress = async (email) => {
+
+    const { data: person, error } = await supabase
+        .from('person')
+        .select('email, name')
+        .eq('email', email)
+        if(error) console.log(error)
+        else {
+            return person.length > 0 ? person[0].name : null
+        }
+}
+
 export { 
     getPerson, 
-    searchForPersonName 
-}
+    searchForPersonName ,
+    getNameFromEmailAddress
+}   
