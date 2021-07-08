@@ -78,7 +78,7 @@ const Profile = ({ page }) => {
             <div>
                 <Header />
 
-                { successMsg && <p className="mt mb success-msg">{successMsg}</p>}
+                { successMsg && <p className="mt mb success">{successMsg}</p>}
                 { errorMsg && <p className="mt mb error">{errorMsg}</p>}
 
                 <div className={profileStyles.header}>
@@ -86,7 +86,7 @@ const Profile = ({ page }) => {
                         <div>
                             <h2>{`${profileName}'s page`}</h2>
                             <div className={profileStyles.enjoying}>
-                                <p className={`success-msg ${profileStyles.currently}`}>currently enjoying</p>
+                                <p className={`success ${profileStyles.currently}`}>currently enjoying</p>
                                 {<Enjoying profileId={profile.id} />}
                             </div>
                         </div>

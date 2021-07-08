@@ -41,7 +41,7 @@ const Search = () => {
                 search &&
                     <div className={searchStyle.main}>
                         <h2><Link to={`/profile/${search.name}`} className="default-link">{search.name}</Link>{search.title}</h2>
-                        { successMsg && <p className="mt mb success-msg">{successMsg}</p>}
+                        { successMsg && <p className="mt mb success">{successMsg}</p>}
                         <p>{search.description}</p>
                         <div className={searchStyle.footer}>
                             <p className={searchStyle.date}>Searched {getTime(search.createdAt)}</p>
