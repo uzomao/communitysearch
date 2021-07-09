@@ -86,7 +86,6 @@ const Profile = ({ page }) => {
                         <div>
                             <h2>{`${profileName}'s page`}</h2>
                             <div className={profileStyles.enjoying}>
-                                <p className={`success ${profileStyles.currently}`}>currently enjoying</p>
                                 {<Enjoying profileId={profile.id} />}
                             </div>
                         </div>

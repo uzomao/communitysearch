@@ -6,7 +6,7 @@ import Context from '../../context'
 import { MdClose } from 'react-icons/md'
 
 
-const Enjoying = ({ profileId }) => {
+const Enjoying = ({ profileId, isFormOpen }) => {
 
     const titleRef = useRef(null)
     const urlRef = useRef(null)
@@ -16,7 +16,7 @@ const Enjoying = ({ profileId }) => {
 
     const [enjoying, setEnjoying] = useState(null)
     const [warnings, setWarnings] = useState(null)
-    const [openForm, setOpenForm] = useState(false)
+    const [openForm, setOpenForm] = useState(isFormOpen || false)
 
     const getEnjoying = useCallback(async(profileId) => {
         
@@ -58,7 +58,12 @@ const Enjoying = ({ profileId }) => {
         if(!titleRef.current.value) {warnings.title = 'Please add a title'}
         if(!urlRef.current.value.includes('http'))(warnings.url = 'Please add a valid url')
         
-        Object.keys(warnings).length === 0 ? addEnjoying() : setWarnings(warnings)
+        if(Object.keys(warnings).length === 0){
+            addEnjoying()
+            isFormOpen && setOpenForm(false)
+        } else {
+            setWarnings(warnings)
+        }
     }
 
     const showEnjoying = (enjoying) => {
@@ -72,6 +77,7 @@ const Enjoying = ({ profileId }) => {
 
     return (
         <>
+            <p className='success'>currently enjoying</p>
             {
                 !openForm ?
                     <>
